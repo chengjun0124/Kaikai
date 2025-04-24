@@ -1,0 +1,37 @@
+<head></head>
+<div class="home_menu">
+    <ul class="menu_list">
+        <li>
+            <a routerLink="/orders">
+                <p>
+                    <img src="assets/imgs/menu-1.png" />
+                </p>
+                <p class="menu_list_name">订单管理</p>
+            </a>
+        </li>
+        <li *ngIf="userTypeId==1">
+            <a routerLink="/users">
+                <p>
+                    <img src="assets/imgs/menu-2.png" />
+                </p>
+                <p class="menu_list_name">用户管理</p>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/sizes">
+                <p>
+                    <img src="assets/imgs/menu-8.png" />
+                </p>
+                <p class="menu_list_name">尺码管理</p>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/summary">
+                <p>
+                    <img src="assets/imgs/menu-5.png" />
+                </p>
+                <p class="menu_list_name">汇总</p>
+            </a>
+        </li>
+    </ul>
+</div>

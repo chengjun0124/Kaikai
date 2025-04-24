@@ -1,0 +1,1680 @@
+<head></head>
+<form novalidate [formGroup]="form">
+    <table>
+        <tr>
+            <td>集团名称</td>
+            <td><input type="text" enter maxlength="20" validation #group="validation"
+                    [formControlName]="field.F_GROUP"></td>
+            <td>公司名称</td>
+            <td><input type="text" enter maxlength="20" validation #company="validation"
+                    [formControlName]="field.F_COMPANY"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">
+                {{group.getError('required','pattern')}}
+            </td>
+            <td></td>
+            <td class="invalid_msg">
+                {{company.getError('required','pattern')}}
+            </td>
+        </tr>
+        <tr>
+            <td>部门</td>
+            <td><input type="text" enter maxlength="20" validation #department="validation"
+                    [formControlName]="field.F_DEPARTMENT"></td>
+            <td>职务</td>
+            <td><input type="text" enter maxlength="20" [formControlName]="field.F_JOB"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">
+                {{department.getError('required')}}
+            </td>
+            <td></td>
+            <td class="invalid_msg"></td>
+        </tr>
+        <tr>
+            <td>工号</td>
+            <td><input type="text" enter maxlength="20" validation #employeeCode="validation"
+                    [formControlName]="field.F_EMPLOYEE_CODE"></td>
+            <td>姓名</td>
+            <td><input type="text" enter maxlength="30" validation #name="validation" [formControlName]="field.F_NAME">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">
+                {{employeeCode.getError('pattern')}}
+            </td>
+            <td></td>
+            <td class="invalid_msg">
+                {{name.getError('required')}}
+            </td>
+        </tr>
+        <tr>
+            <td>年龄</td>
+            <td>
+                <input type="text" enter validation #age="validation" maxlength="3" [formControlName]="field.F_AGE">
+            </td>
+            <td>性别</td>
+            <td>
+                <input type="radio" enter validation #sex="validation" [formControlName]="field.F_SEX" value="M"
+                    (change)="clearAll()" name="sex"> 男 <input type="radio" validation #sex="validation"
+                    (change)="clearAll()" enter value="F" [formControlName]="field.F_SEX" name="sex"> 女
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">
+                {{age.getError('number', 'range')}}
+            </td>
+            <td></td>
+            <td class="invalid_msg"></td>
+        </tr>
+        <tr>
+            <td>身高</td>
+            <td><input type="text" enter maxlength="5" validation #height="validation"
+                    [formControlName]="field.F_HEIGHT">
+            </td>
+            <td>体重</td>
+            <td><input type="text" enter maxlength="5" validation #weight="validation"
+                    [formControlName]="field.F_WEIGHT"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">
+                {{height.getError('number','range')}}
+            </td>
+            <td></td>
+            <td class="invalid_msg">
+                {{weight.getError('number','range')}}
+            </td>
+        </tr>
+    </table>
+    <!-- Cannot find control with path: 'suit -> '是由于html里面引用了不存在的F_XXX -->
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab validation #shirt="validation" [formGroupName]="field.F_SHIRT">
+            <ng-template mat-tab-label>
+                <i [class.fa-exclamation-triangle]="shirt.invalid" class="fa">衬衫</i>
+            </ng-template>
+            <table class="border">
+                <thead>
+                    <th colspan="5">衬衫</th>
+                </thead>
+                <tr>
+                    <td class="padding-left"></td>
+                    <td>尺码</td>
+                    <td>
+                        <input maxlength="10" enter type="text" (input)="clearFields(field.F_SHIRT)"
+                            [formControlName]="field.F_SIZENAME" />
+                    </td>
+                    <td>领围</td>
+                    <td><input type="text" validation #shirtNeck="validation" enter (input)="clearSize(field.F_SHIRT)"
+                            maxlength="5" [formControlName]="field.F_NECK">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirt.getError('required'+field.F_NECK)||shirtNeck.getError('number','range')}}
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>肩宽</td>
+                    <td>
+                        <input type="text" enter validation #shirtShoulder="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="5" [formControlName]="field.F_SHOULDER">
+                    </td>
+                    <td>前衣长</td>
+                    <td>
+                        <input type="text" enter validation #shirtFLength="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="5" [formControlName]="field.F_FLENGTH"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirt.getError('required'+field.F_SHOULDER)||shirtShoulder.getError('number','range')}}
+                    </td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirt.getError('requiredFBLength')||shirtFLength.getError('number','range')}}
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>后衣长</td>
+                    <td>
+                        <input type="text" enter validation #shirtBLength="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="5" [formControlName]="field.F_BLENGTH"></td>
+                    <td>胸围</td>
+                    <td>
+                        <input type="text" enter validation #shirtChest="validation" (input)="clearSize(field.F_SHIRT)"
+                            maxlength="5" [formControlName]="field.F_CHEST">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirtBLength.getError('number','range')}}
+                    </td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirt.getError('required'+field.F_CHEST)||shirtChest.getError('number','range')}}
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>腰围</td>
+                    <td>
+                        <input type="text" enter validation #shirtWaist="validation" (input)="clearSize(field.F_SHIRT)"
+                            maxlength="5" [formControlName]="field.F_WAIST">
+                    </td>
+                    <td>下摆</td>
+                    <td>
+                        <input type="text" enter validation #shirtLowerHem="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="5" [formControlName]="field.F_LOWERHEM">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirtWaist.getError('number','range')}}
+                    </td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirtLowerHem.getError('number','range')}}
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>喜好</td>
+                    <td colspan="3">
+                        <input enter type="radio" value="B" [formControlName]="field.F_PRESIZE"
+                            [name]="field.F_PRESIZE"> 偏大 <input enter [formControlName]="field.F_PRESIZE" type="radio"
+                            value="S" [name]="field.F_PRESIZE"> 偏小</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>长袖长</td>
+                    <td>
+                        <input type="text" enter validation #shirtLSleeveLength="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="5"
+                            [formControlName]="field.F_LSLEEVELENGTH"></td>
+                    <td>长袖口大</td>
+                    <td>
+                        <input type="text" enter validation #shirtLSleeveCuff="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="5" [formControlName]="field.F_LSLEEVECUFF">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirt.getError('required'+field.F_LSLEEVELENGTH)||shirtLSleeveLength.getError('number','range')}}
+                    </td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirtLSleeveCuff.getError('number','range')}}
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>长袖加工费</td>
+                    <td>
+                        <input type="text" validation #shirtLPrice="validation" enter maxlength="10"
+                            [formControlName]="field.F_LPRICE">
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirtLPrice.getError('number','range')}}
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>短袖长</td>
+                    <td>
+                        <input type="text" enter validation #shirtSSleeveLength="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="5"
+                            [formControlName]="field.F_SSLEEVELENGTH"></td>
+                    <td>短袖口大</td>
+                    <td>
+                        <input type="text" enter validation #shirtSSleeveCuff="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="5" [formControlName]="field.F_SSLEEVECUFF">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirt.getError('required'+field.F_SSLEEVELENGTH)||shirtSSleeveLength.getError('number','range')}}
+                    </td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirtSSleeveCuff.getError('number','range')}}
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>短袖加工费</td>
+                    <td>
+                        <input type="text" enter validation #shirtSPrice="validation" maxlength="10"
+                            [formControlName]="field.F_SPRICE">
+                    </td>
+                    <td>胸围放大</td>
+                    <td><input type="text" enter validation #shirtChestEnlarge="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="2" [formControlName]="field.F_CHESTENLARGE">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirtSPrice.getError('number','range')}}
+                    </td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirtChestEnlarge.getError('number','range')}}
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>腰围放大</td>
+                    <td>
+                        <input type="text" enter validation #shirtWaistEnlarge="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="2" [formControlName]="field.F_WAISTENLARGE">
+                    </td>
+                    <td>下摆放大</td>
+                    <td><input type="text" enter validation #shirtLowerHemEnlarge="validation"
+                            (input)="clearSize(field.F_SHIRT)" maxlength="2"
+                            [formControlName]="field.F_LOWERHEMENLARGE"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirtWaistEnlarge.getError('number','range')}}
+                    </td>
+                    <td></td>
+                    <td class="invalid_msg">
+                        {{shirtLowerHemEnlarge.getError('number','range')}}
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>备注</td>
+                    <td>
+                        <input enter maxlength="500" [formControlName]="field.F_MEMO" />
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <table class="border">
+                <thead>
+                    <th colspan="8">明细</th>
+                </thead>
+                <tr>
+                    <td class="padding-left"></td>
+                    <td>长袖</td>
+                    <td>
+                        <input type="checkbox" enter validation #longSleeveIsEnabled="validation"
+                            [formControlName]="field.F_L_SLEEVE_IS_ENABLED">&nbsp;
+                        <button type="button" class="sm" [disabled]="longSleeveIsEnabled.value?null:true" mat-flat-button
+                            color="primary" (click)="addShirtDetail(true, '', '', 1)">添加</button>
+                        <span class="invalid_msg">
+                            {{shirt.getError('oneisrequired')}}
+                        </span>
+                    </td>
+                    <td colspan="5"></td>
+                </tr>
+                <tbody [class.disabled]="!longSleeveIsEnabled.value" validation #longSleeves="validation"
+                    [formArrayName]="field.F_LONG_SLEEVES">
+                    <tr class="valign_top" [formGroupName]="i"
+                        *ngFor="let d of longSleeves.controls; let i=index;let last=last;">
+                        <td></td>
+                        <td>颜色</td>
+                        <td class="invalid_msg">
+                            <input validation #color="validation" [attr.disabled]="longSleeveIsEnabled.value?null:true"
+                                enter class="sm" maxlength="10" type="text" [formControlName]="field.F_COLOR"><br />
+                            {{longSleeves.getError('requiredColor'+i)||color.getError('pattern')}}
+                        </td>
+                        <td>布料</td>
+                        <td class="invalid_msg">
+                            <input validation #cloth="validation" [attr.disabled]="longSleeveIsEnabled.value?null:true"
+                                enter class="sm" maxlength="10" type="text" [formControlName]="field.F_CLOTH"><br />
+                            {{longSleeves.getError('requiredCloth'+i)||cloth.getError('pattern')}}
+                        </td>
+                        <td>数量</td>
+                        <td class="invalid_msg">
+                            <input validation #amount="validation" [attr.disabled]="longSleeveIsEnabled.value?null:true"
+                                type="text" class="sm" enter maxlength="7" [formControlName]="field.F_AMOUNT"><br />
+                            {{amount.getError('required', 'number')}}
+                        </td>
+                        <td>
+                            <button type="button" class="sm"
+                                [disabled]="!longSleeveIsEnabled.value||longSleeves.controls.length===1?true:null"
+                                mat-flat-button color="primary"
+                                (click)="deleteDetail(longSleeves.getControl(), i)">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tr>
+                    <td></td>
+                    <td>短袖</td>
+                    <td>
+                        <input enter type="checkbox" validation #shortSleeveIsEnabled="validation"
+                            [formControlName]="field.F_S_SLEEVE_IS_ENABLED">&nbsp;
+                        <button type="button" class="sm" [disabled]="shortSleeveIsEnabled.value?null:true" mat-flat-button
+                            color="primary"
+                            (click)="shortSleeveIsEnabled.value?addShirtDetail(false, '', '', 1):null">添加</button>
+                    </td>
+                    <td colspan="5"></td>
+                </tr>
+                <tbody [class.disabled]="!shortSleeveIsEnabled.value" validation #shortSleeves="validation"
+                    [formArrayName]="field.F_SHORT_SLEEVES">
+                    <tr class="valign_top" [formGroupName]="i"
+                        *ngFor="let d of shortSleeves.controls; let i=index;let last=last;">
+                        <td></td>
+                        <td>颜色</td>
+                        <td class="invalid_msg">
+                            <input validation #color="validation" [attr.disabled]="shortSleeveIsEnabled.value?null:true"
+                                enter class="sm" maxlength="10" type="text" [formControlName]="field.F_COLOR">
+                            <br />
+                            {{shortSleeves.getError('requiredColor'+i)||color.getError('pattern')}}
+                        </td>
+                        <td>布料</td>
+                        <td class="invalid_msg">
+                            <input validation #cloth="validation" [attr.disabled]="shortSleeveIsEnabled.value?null:true"
+                                type="text" enter class="sm" maxlength="10" [formControlName]="field.F_CLOTH">
+                            <br />
+                            {{shortSleeves.getError('requiredCloth'+i)||cloth.getError('pattern')}}
+                        </td>
+                        <td>数量</td>
+                        <td class="invalid_msg">
+                            <input validation #amount="validation"
+                                [attr.disabled]="shortSleeveIsEnabled.value?null:true" type="text" enter class="sm"
+                                maxlength="7" [formControlName]="field.F_AMOUNT"><br />
+                            {{amount.getError('required', 'number')}}
+                        </td>
+                        <td><button type="button" class="sm"
+                                [disabled]="!shortSleeveIsEnabled.value||shortSleeves.controls.length===1?true:null"
+                                mat-flat-button color="primary"
+                                (click)="deleteDetail(shortSleeves.getControl(), i)">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-tab>
+        <mat-tab validation #suit="validation" [formGroupName]="field.F_SUIT">
+            <ng-template mat-tab-label>
+                <i [class.fa-exclamation-triangle]="suit.invalid" class="fa">西服</i>
+            </ng-template>
+            <div class="container">
+                <div class="row">
+                    <table class="border">
+                        <thead>
+                            <th colspan="5">
+                                西服
+                            </th>
+                        </thead>
+                        <tr>
+                            <td class="padding-left"></td>
+                            <td>号型</td>
+                            <td>
+                                <input maxlength="10" enter type="text" (input)="clearFields(field.F_SUIT, 'suit')"
+                                    [formControlName]="field.F_MODEL" />
+                            </td>
+                            <td>规格</td>
+                            <td><input validation type="text" enter (input)="clearFields(field.F_SUIT, 'suit')"
+                                    maxlength="10" [formControlName]="field.F_SPEC"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">{{suit.getError('required'+field.F_MODEL)}}</td>
+                            <td></td>
+                            <td class="invalid_msg">{{suit.getError('required'+field.F_SPEC)}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>前衣长</td>
+                            <td>
+                                <input validation #suitFLength="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'suit')" maxlength="5"
+                                    [formControlName]="field.F_FLENGTH">
+                            </td>
+                            <td>袖长</td>
+                            <td>
+                                <input validation #suitSleeveLength="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'suit')" maxlength="5"
+                                    [formControlName]="field.F_SLEEVE_LENGTH"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_FLENGTH)||suitFLength.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_SLEEVE_LENGTH)||suitSleeveLength.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>肩宽</td>
+                            <td>
+                                <input validation #suitShoulder="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'suit')" maxlength="5"
+                                    [formControlName]="field.F_SHOULDER">
+                            </td>
+                            <td>胸围</td>
+                            <td>
+                                <input validation #suitChest="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'suit')" maxlength="5"
+                                    [formControlName]="field.F_CHEST"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_SHOULDER)||suitShoulder.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_CHEST)||suitChest.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>中腰</td>
+                            <td>
+                                <input validation #suitMidWaist="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'suit')" maxlength="5"
+                                    [formControlName]="field.F_MID_WAIST">
+                            </td>
+                            <td>下摆</td>
+                            <td>
+                                <input validation #suitLowerHem="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'suit')" maxlength="5"
+                                    [formControlName]="field.F_LOWERHEM">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_MID_WAIST)||suitMidWaist.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_LOWERHEM)||suitLowerHem.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>袖口</td>
+                            <td colspan="3">
+                                <input validation #suitSleeveCuff="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'suit')" maxlength="5"
+                                    [formControlName]="field.F_SLEEVE_CUFF">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_SLEEVE_CUFF)||suitSleeveCuff.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <thead>
+                            <th colspan="5">
+                                西裤
+                            </th>
+                        </thead>
+                        <tr>
+                            <td></td>
+                            <td>号型</td>
+                            <td>
+                                <input maxlength="10" enter type="text" (input)="clearFields(field.F_SUIT, 'trousers')"
+                                    [formControlName]="field.F_TROUSERS_MODEL" />
+                            </td>
+                            <td>臀围</td>
+                            <td><input validation #suitHip="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'trousers')" maxlength="5"
+                                    [formControlName]="field.F_HIP">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg"></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_HIP)||suitHip.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td [class.disabled]="sex.value!=='M'">腰围</td>
+                            <td>
+                                <input [attr.disabled]="sex.value==='M'?null:true" validation #suitWaist="validation"
+                                    type="text" enter (input)="clearSize(field.F_SUIT, 'trousers')" maxlength="5"
+                                    [formControlName]="field.F_WAIST">
+                            </td>
+                            <td [class.disabled]="sex.value!=='F'">腰成</td>
+                            <td>
+                                <input [attr.disabled]="sex.value==='F'?null:true" validation
+                                    #suitWomanWaist="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'trousers')" maxlength="5"
+                                    [formControlName]="field.F_WOMAN_WAIST"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_WAIST)||suitWaist.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_WOMAN_WAIST)||suitWomanWaist.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td [class.disabled]="sex.value!=='M'">连腰直档</td>
+                            <td>
+                                <input validation [attr.disabled]="sex.value==='M'?null:true"
+                                    #suitWaistFork="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'trousers')" maxlength="5"
+                                    [formControlName]="field.F_WAIST_FORK"></td>
+                            <td [class.disabled]="sex.value!=='F'">直档</td>
+                            <td>
+                                <input [attr.disabled]="sex.value==='F'?null:true" validation #suitFork="validation"
+                                    type="text" enter (input)="clearSize(field.F_SUIT, 'trousers')" maxlength="5"
+                                    [formControlName]="field.F_FORK"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_WAIST_FORK)||suitWaistFork.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_FORK)||suitFork.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>横档</td>
+                            <td>
+                                <input validation #suitLateralFork="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'trousers')" maxlength="5"
+                                    [formControlName]="field.F_LATERAL_FORK">
+                            </td>
+                            <td [class.disabled]="sex.value!=='F'">中档</td>
+                            <td><input [attr.disabled]="sex.value==='F'?null:true" validation #suitMidFork="validation"
+                                    type="text" enter (input)="clearSize(field.F_SUIT, 'trousers')" maxlength="5"
+                                    [formControlName]="field.F_MID_FORK">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_LATERAL_FORK)||suitLateralFork.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_MID_FORK)||suitMidFork.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>净裤长</td>
+                            <td>
+                                <input validation #suitTrousersLength="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'trousers')" maxlength="5"
+                                    [formControlName]="field.F_TROUSERS_LENGTH">
+                            </td>
+                            <td>脚口</td>
+                            <td><input validation #suitHemHeight="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'trousers')" maxlength="5"
+                                    [formControlName]="field.F_HEM_HEIGHT"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_TROUSERS_LENGTH)||suitTrousersLength.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_HEM_HEIGHT)||suitHemHeight.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <thead>
+                            <th colspan="5">
+                                裙子
+                            </th>
+                        </thead>
+                        <tr>
+                            <td></td>
+                            <td [class.disabled]="sex.value!=='F'">裙号型</td>
+                            <td>
+                                <input [attr.disabled]="sex.value==='F'?null:true" maxlength="10" enter type="text"
+                                    (input)="clearFields(field.F_SUIT, 'skirt')"
+                                    [formControlName]="field.F_SKIRT_MODEL" />
+                            </td>
+                            <td [class.disabled]="sex.value!=='F'">裙腰围</td>
+                            <td><input [attr.disabled]="sex.value==='F'?null:true" validation
+                                    #suitSkirtWaist="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'skirt')" maxlength="5"
+                                    [formControlName]="field.F_SKIRT_WAIST"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_SKIRT_WAIST)||suitSkirtWaist.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td [class.disabled]="sex.value!=='F'">裙臀围</td>
+                            <td>
+                                <input [attr.disabled]="sex.value==='F'?null:true" validation #suitSkirtHip="validation"
+                                    type="text" enter (input)="clearSize(field.F_SUIT, 'skirt')" maxlength="5"
+                                    [formControlName]="field.F_SKIRT_HIP">
+                            </td>
+                            <td [class.disabled]="sex.value!=='F'">裙长</td>
+                            <td>
+                                <input [attr.disabled]="sex.value==='F'?null:true" validation
+                                    #suitSkirtLength="validation" type="text" enter
+                                    (input)="clearSize(field.F_SUIT, 'skirt')" maxlength="5"
+                                    [formControlName]="field.F_SKIRT_LENGTH">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_SKIRT_HIP)||suitSkirtHip.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suit.getError('required'+field.F_SKIRT_LENGTH)||suitSkirtLength.getError('number','range')}}
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="border-grey">
+                        <thead>
+                            <th colspan="5">
+                                西服变量
+                            </th>
+                        </thead>
+                        <tr class="align">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>前衣长变量</td>
+                            <td>
+                                <input type="text" validation #suitFLengthVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_FLENGTH_VAR"></td>
+                            <td>袖长变量</td>
+                            <td>
+                                <input type="text" validation #suitSleeveLengthVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_SLEEVE_LENGTH_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitFLengthVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitSleeveLengthVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>肩宽变量</td>
+                            <td>
+                                <input type="text" validation #suitShoulderVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_SHOULDER_VAR"></td>
+                            <td>胸围变量</td>
+                            <td>
+                                <input type="text" validation #suitChestVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_CHEST_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitShoulderVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitChestVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>中腰变量</td>
+                            <td>
+                                <input type="text" validation #suitMidWaistVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_MID_WAIST_VAR"></td>
+                            <td>下摆变量</td>
+                            <td>
+                                <input type="text" validation #suitLowerhemVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_LOWERHEM_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitMidWaistVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitLowerhemVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>袖口变量</td>
+                            <td colspan="3">
+                                <input type="text" validation #suitSleeveCuffVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_SLEEVE_CUFF_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitSleeveCuffVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <thead>
+                            <th colspan="5">
+                                西裤变量
+                            </th>
+                        </thead>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+
+                            </td>
+                            <td>臀围变量</td>
+                            <td><input type="text" validation #suitHipVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_HIP_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitHipVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>腰围变量</td>
+                            <td>
+                                <input type="text" validation #suitWaistVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_WAIST_VAR">
+                            </td>
+                            <td>腰成变量</td>
+                            <td>
+                                <input type="text" validation #suitWomanWaistVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_WOMAN_WAIST_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitWaistVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitWomanWaistVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>连腰直档变量</td>
+                            <td>
+                                <input type="text" validation #suitWaistForkVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_WAIST_FORK_VAR"></td>
+                            <td>直档变量</td>
+                            <td>
+                                <input type="text" validation #suitForkVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_FORK_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitWaistForkVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitForkVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>横档变量</td>
+                            <td>
+                                <input type="text" validation #suitLateralForkVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_LATERAL_FORK_VAR">
+                            </td>
+                            <td>中档变量</td>
+                            <td><input type="text" validation #suitMidForkVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_MID_FORK_VAR">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitLateralForkVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitMidForkVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>净裤长变量</td>
+                            <td>
+                                <input type="text" validation #suitTrousersLengthVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_TROUSERS_LENGTH_VAR">
+                            </td>
+                            <td>脚口变量</td>
+                            <td><input type="text" validation #suitHemHeightVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_HEM_HEIGHT_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitTrousersLengthVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitHemHeightVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <thead>
+                            <th colspan="5">
+                                裙子变量
+                            </th>
+                        </thead>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                            </td>
+                            <td>裙腰围变量</td>
+                            <td><input type="text" validation #suitSkirtWaistVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_SKIRT_WAIST_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitSkirtWaistVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>裙臀围变量</td>
+                            <td>
+                                <input type="text" validation #suitSkirtHipVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_SKIRT_HIP_VAR">
+                            </td>
+                            <td>裙长变量</td>
+                            <td>
+                                <input type="text" validation #suitSkirtLengthVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_SKIRT_LENGTH_VAR">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitSkirtHipVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{suitSkirtLengthVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <table class="border">
+                <thead>
+                    <th>
+                        备注
+                    </th>
+                </thead>
+                <tr>
+                    <td><textarea maxlength="500" [formControlName]="field.F_MEMO"></textarea></td>
+                </tr>
+            </table>
+            <table class="large border">
+                <thead>
+                    <th colspan="12">
+                        明细
+                    </th>
+                </thead>
+                <tr>
+                    <td class="padding-left"></td>
+                    <td class="label">西服</td>
+                    <td>
+                        <input validation #suitIsEnabled="validation" type="checkbox" enter
+                            [formControlName]="field.F_ISENABLED" />&nbsp;
+                        <button class="sm" type="button" [disabled]="suitIsEnabled.value?null:true" mat-flat-button color="primary"
+                            (click)="addDetail(suits.getControl(), '', '', 1, '', '')">添加</button>
+                        <span class="invalid_msg">
+                            {{suit.getError('requiredDetails')}}
+                        </span></td>
+                    <td colspan="9"></td>
+                </tr>
+                <tbody [class.disabled]="!suitIsEnabled.value" validation #suits="validation"
+                    [formArrayName]="field.F_DETAILS">
+                    <tr class="valign_top" [formGroupName]="i"
+                        *ngFor="let d of suits.controls; let i=index;let last=last;">
+                        <td></td>
+                        <td>种类</td>
+                        <td class="invalid_msg"><input validation #subCategory="validation"
+                                [attr.disabled]="suitIsEnabled.value?null:true" enter maxlength="10" type="text"
+                                class="sm" [formControlName]="field.F_SUBCATEGORY"><br />
+                            {{suit.getError('required'+field.F_SUBCATEGORY+i)||subCategory.getError('pattern')}}
+                        </td>
+                        <td>颜色</td>
+                        <td class="invalid_msg">
+                            <input validation #color="validation" [attr.disabled]="suitIsEnabled.value?null:true" enter
+                                maxlength="10" type="text" class="sm" [formControlName]="field.F_COLOR"><br />
+                            {{suit.getError('required'+field.F_COLOR+i)||color.getError('pattern')}}
+                        </td>
+                        <td>布料</td>
+                        <td class="invalid_msg">
+                            <input validation #cloth="validation" [attr.disabled]="suitIsEnabled.value?null:true" enter
+                                maxlength="10" type="text" class="sm" [formControlName]="field.F_CLOTH"><br />
+                            {{suit.getError('required'+field.F_CLOTH+i)||cloth.getError('pattern')}}
+                        </td>
+                        <td>数量</td>
+                        <td class="invalid_msg"><input validation #amount="validation"
+                                [attr.disabled]="suitIsEnabled.value?null:true" enter type="text" class="sm"
+                                maxlength="7" [formControlName]="field.F_AMOUNT"><br />
+                            {{suit.getError('required'+field.F_AMOUNT+i)||amount.getError('number')}}
+                        </td>
+                        <td>加工费</td>
+                        <td class="invalid_msg"><input validation #price="validation"
+                                [attr.disabled]="suitIsEnabled.value?null:true" enter type="text" maxlength="10"
+                                class="sm" [formControlName]="field.F_PRICE"><br />
+                            {{price.getError('number','range')}}
+                        </td>
+                        <td>
+                            <button type="button" class="sm" [disabled]="suitIsEnabled.value?null:true" mat-flat-button
+                                color="primary" (click)="deleteDetail(suits.getControl(), i)">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-tab>
+        <mat-tab validation #coat="validation" [formGroupName]="field.F_COAT">
+            <ng-template mat-tab-label>
+                <i [class.fa-exclamation-triangle]="coat.invalid" class="fa">大衣</i>
+            </ng-template>
+            <div class="container">
+                <div class="row">
+                    <table class="border">
+                        <thead>
+                            <th colspan="5">
+                                大衣
+                            </th>
+                        </thead>
+                        <tr>
+                            <td class="padding-left"></td>
+                            <td>号型</td>
+                            <td>
+                                <input maxlength="10" enter type="text" (input)="clearFields(field.F_COAT)"
+                                    [formControlName]="field.F_MODEL" />
+                            </td>
+                            <td>规格</td>
+                            <td><input validation type="text" enter (input)="clearFields(field.F_COAT)" maxlength="10"
+                                    [formControlName]="field.F_SPEC"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coat.getError('required'+field.F_MODEL)}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coat.getError('required'+field.F_SPEC)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>前衣长</td>
+                            <td>
+                                <input validation #coatFLength="validation" type="text" enter
+                                    (input)="clearSize(field.F_COAT)" maxlength="5"
+                                    [formControlName]="field.F_FLENGTH"></td>
+                            <td>袖长</td>
+                            <td>
+                                <input validation #coatSleeveLength="validation" type="text" enter
+                                    (input)="clearSize(field.F_COAT)" maxlength="5"
+                                    [formControlName]="field.F_SLEEVE_LENGTH"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coat.getError('required'+field.F_FLENGTH)||coatFLength.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coat.getError('required'+field.F_SLEEVE_LENGTH)||coatSleeveLength.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>肩宽</td>
+                            <td>
+                                <input validation #coatShoulder="validation" type="text" enter
+                                    (input)="clearSize(field.F_COAT)" maxlength="5"
+                                    [formControlName]="field.F_SHOULDER"></td>
+                            <td>胸围</td>
+                            <td>
+                                <input validation #coatChest="validation" type="text" enter
+                                    (input)="clearSize(field.F_COAT)" maxlength="5" [formControlName]="field.F_CHEST">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coat.getError('required'+field.F_SHOULDER)||coatShoulder.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coat.getError('required'+field.F_CHEST)||coatChest.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>中腰</td>
+                            <td>
+                                <input validation #coatMidWaist="validation" type="text" enter
+                                    (input)="clearSize(field.F_COAT)" maxlength="5"
+                                    [formControlName]="field.F_MID_WAIST"></td>
+                            <td>下摆</td>
+                            <td>
+                                <input validation #coatLowerHem="validation" type="text" enter
+                                    (input)="clearSize(field.F_COAT)" maxlength="5"
+                                    [formControlName]="field.F_LOWERHEM"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coat.getError('required'+field.F_MID_WAIST)||coatMidWaist.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coat.getError('required'+field.F_LOWERHEM)||coatLowerHem.getError('number','range')}}
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="border-grey">
+                        <thead>
+                            <th colspan="5">
+                                大衣变量
+                            </th>
+                        </thead>
+                        <tr class="align">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>前衣长变量</td>
+                            <td>
+                                <input type="text" validation #coatFLengthVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_FLENGTH_VAR"></td>
+                            <td>袖长变量</td>
+                            <td>
+                                <input type="text" validation #coatSleeveLengthVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_SLEEVE_LENGTH_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coatFLengthVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coatSleeveLengthVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>肩宽变量</td>
+                            <td>
+                                <input type="text" validation #coatShoulderVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_SHOULDER_VAR"></td>
+                            <td>胸围变量</td>
+                            <td>
+                                <input type="text" validation #coatChestVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_CHEST_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coatShoulderVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coatChestVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>中腰变量</td>
+                            <td>
+                                <input type="text" validation #coatMidWaistVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_MID_WAIST_VAR"></td>
+                            <td>下摆变量</td>
+                            <td>
+                                <input type="text" validation #coatLowerhemVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_LOWERHEM_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coatMidWaistVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{coatLowerhemVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <table class="border">
+                <thead>
+                    <th>
+                        备注
+                    </th>
+                </thead>
+                <tr>
+                    <td><textarea maxlength="500" [formControlName]="field.F_MEMO"></textarea></td>
+                </tr>
+            </table>
+            <table class="large border">
+                <thead>
+                    <th colspan="12">
+                        明细
+                    </th>
+                </thead>
+                <tr>
+                    <td class="padding-left"></td>
+                    <td class="label">大衣</td>
+                    <td>
+                        <input validation #coatIsEnabled="validation" type="checkbox" enter
+                            [formControlName]="field.F_ISENABLED" />&nbsp;
+                        <button type="button" class="sm" [disabled]="coatIsEnabled.value?null:true" mat-flat-button color="primary"
+                            (click)="addDetail(coats.getControl(), '', '', 1, '', '')">添加</button>
+                        <span class="invalid_msg">
+                            {{coat.getError('requiredDetails')}}
+                        </span></td>
+                    <td colspan="9"></td>
+                </tr>
+                <tbody [class.disabled]="!coatIsEnabled.value" validation #coats="validation"
+                    [formArrayName]="field.F_DETAILS">
+                    <tr class="valign_top" [formGroupName]="i"
+                        *ngFor="let d of coats.controls; let i=index;let last=last;">
+                        <td></td>
+                        <td>种类</td>
+                        <td class="invalid_msg"><input validation #subCategory="validation"
+                                [attr.disabled]="coatIsEnabled.value?null:true" enter maxlength="10" type="text"
+                                class="sm" [formControlName]="field.F_SUBCATEGORY"><br />
+                            {{coat.getError('required'+field.F_SUBCATEGORY+i)||subCategory.getError('pattern')}}
+                        </td>
+                        <td>颜色</td>
+                        <td class="invalid_msg">
+                            <input validation #color="validation" [attr.disabled]="coatIsEnabled.value?null:true" enter
+                                maxlength="10" type="text" class="sm" [formControlName]="field.F_COLOR"><br />
+                            {{coat.getError('required'+field.F_COLOR+i)||color.getError('pattern')}}
+                        </td>
+                        <td>布料</td>
+                        <td class="invalid_msg">
+                            <input validation #cloth="validation" [attr.disabled]="coatIsEnabled.value?null:true" enter
+                                maxlength="10" type="text" class="sm" [formControlName]="field.F_CLOTH"><br />
+                            {{coat.getError('required'+field.F_CLOTH+i)||cloth.getError('pattern')}}
+                        </td>
+                        <td>数量</td>
+                        <td class="invalid_msg"><input validation #amount="validation"
+                                [attr.disabled]="coatIsEnabled.value?null:true" enter type="text" class="sm"
+                                maxlength="7" [formControlName]="field.F_AMOUNT"><br />
+                            {{coat.getError('required'+field.F_AMOUNT+i)||amount.getError('number')}}
+                        </td>
+                        <td>加工费</td>
+                        <td class="invalid_msg"><input validation #price="validation"
+                                [attr.disabled]="coatIsEnabled.value?null:true" enter type="text" maxlength="10"
+                                class="sm" [formControlName]="field.F_PRICE"><br />
+                            {{price.getError('number','range')}}
+                        </td>
+                        <td>
+                            <button type="button" class="sm" [disabled]="coatIsEnabled.value?null:true" mat-flat-button
+                                color="primary" (click)="deleteDetail(coats.getControl(), i)">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-tab>
+        <mat-tab validation #waistcoat="validation" [formGroupName]="field.F_WAISTCOAT">
+            <ng-template mat-tab-label>
+                <i [class.fa-exclamation-triangle]="waistcoat.invalid" class="fa">背心</i>
+            </ng-template>
+            <div class="container">
+                <div class="row">
+                    <table class="border">
+                        <thead>
+                            <th colspan="5">
+                                背心
+                            </th>
+                        </thead>
+                        <tr>
+                            <td class="padding-left"></td>
+                            <td>号型</td>
+                            <td>
+                                <input maxlength="10" enter type="text" (input)="clearFields(field.F_WAISTCOAT)"
+                                    [formControlName]="field.F_MODEL" />
+                            </td>
+                            <td>规格</td>
+                            <td><input validation type="text" enter (input)="clearFields(field.F_WAISTCOAT)"
+                                    maxlength="10" [formControlName]="field.F_SPEC"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoat.getError('required'+field.F_MODEL)}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoat.getError('required'+field.F_SPEC)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>前衣长</td>
+                            <td>
+                                <input validation #waistcoatFLength="validation" type="text" enter
+                                    (input)="clearSize(field.F_WAISTCOAT)" maxlength="5"
+                                    [formControlName]="field.F_FLENGTH"></td>
+                            <td>后衣长</td>
+                            <td>
+                                <input validation #waistcoatBLength="validation" type="text" enter
+                                    (input)="clearSize(field.F_WAISTCOAT)" maxlength="5"
+                                    [formControlName]="field.F_BLENGTH"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoat.getError('required'+field.F_FLENGTH)||waistcoatFLength.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoat.getError('required'+field.F_BLENGTH)||waistcoatBLength.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>肩宽</td>
+                            <td>
+                                <input validation #waistcoatShoulder="validation" type="text" enter
+                                    (input)="clearSize(field.F_WAISTCOAT)" maxlength="5"
+                                    [formControlName]="field.F_SHOULDER"></td>
+                            <td>胸围</td>
+                            <td>
+                                <input validation #waistcoatChest="validation" type="text" enter
+                                    (input)="clearSize(field.F_WAISTCOAT)" maxlength="5"
+                                    [formControlName]="field.F_CHEST"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoat.getError('required'+field.F_SHOULDER)||waistcoatShoulder.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoat.getError('required'+field.F_CHEST)||waistcoatChest.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>中腰</td>
+                            <td>
+                                <input validation #waistcoatMidWaist="validation" type="text" enter
+                                    (input)="clearSize(field.F_WAISTCOAT)" maxlength="5"
+                                    [formControlName]="field.F_MID_WAIST"></td>
+                            <td>下摆</td>
+                            <td>
+                                <input validation #waistcoatLowerHem="validation" type="text" enter
+                                    (input)="clearSize(field.F_WAISTCOAT)" maxlength="5"
+                                    [formControlName]="field.F_LOWERHEM"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoat.getError('required'+field.F_MID_WAIST)||waistcoatMidWaist.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoat.getError('required'+field.F_LOWERHEM)||waistcoatLowerHem.getError('number','range')}}
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="border-grey">
+                        <thead>
+                            <th colspan="5">
+                                背心变量
+                            </th>
+                        </thead>
+                        <tr class="align">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>前衣长变量</td>
+                            <td>
+                                <input type="text" validation #waistcoatFLengthVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_FLENGTH_VAR"></td>
+                            <td>后衣长变量</td>
+                            <td>
+                                <input type="text" validation #waistcoatBlengthVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_BLENGTH_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoatFLengthVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoatBlengthVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>肩宽变量</td>
+                            <td>
+                                <input type="text" validation #waistcoatShoulderVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_SHOULDER_VAR"></td>
+                            <td>胸围变量</td>
+                            <td>
+                                <input type="text" validation #waistcoatChestVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_CHEST_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoatShoulderVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoatChestVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>中腰变量</td>
+                            <td>
+                                <input type="text" validation #waistcoatMidWaistVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_MID_WAIST_VAR"></td>
+                            <td>下摆变量</td>
+                            <td>
+                                <input type="text" validation #waistcoatLowerhemVar="validation" enter maxlength="5"
+                                    [formControlName]="field.F_LOWERHEM_VAR"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoatMidWaistVar.getError('number','range')}}
+                            </td>
+                            <td></td>
+                            <td class="invalid_msg">
+                                {{waistcoatLowerhemVar.getError('number','range')}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <table class="border">
+                <thead>
+                    <th>
+                        备注
+                    </th>
+                </thead>
+                <tr>
+                    <td><textarea maxlength="500" [formControlName]="field.F_MEMO"></textarea></td>
+                </tr>
+            </table>
+            <table class="large border">
+                <thead>
+                    <th colspan="12">
+                        明细
+                    </th>
+                </thead>
+                <tr>
+                    <td class="padding-left"></td>
+                    <td class="label">背心</td>
+                    <td>
+                        <input validation #waistcoatIsEnabled="validation" type="checkbox" enter
+                            [formControlName]="field.F_ISENABLED" />&nbsp;
+                        <button type="button" class="sm" [disabled]="waistcoatIsEnabled.value?null:true" mat-flat-button
+                            color="primary" (click)="addDetail(waistcoats.getControl(), '', '', 1, '', '')">添加</button>
+                        <span class="invalid_msg">
+                            {{waistcoat.getError('requiredDetails')}}
+                        </span></td>
+                    <td colspan="9"></td>
+                </tr>
+                <tbody [class.disabled]="!waistcoatIsEnabled.value" validation #waistcoats="validation"
+                    [formArrayName]="field.F_DETAILS">
+                    <tr class="valign_top" [formGroupName]="i"
+                        *ngFor="let d of waistcoats.controls; let i=index;let last=last;">
+                        <td></td>
+                        <td>种类</td>
+                        <td class="invalid_msg"><input validation #subCategory="validation"
+                                [attr.disabled]="waistcoatIsEnabled.value?null:true" enter maxlength="10" type="text"
+                                class="sm" [formControlName]="field.F_SUBCATEGORY"><br />
+                            {{waistcoat.getError('required'+field.F_SUBCATEGORY+i)||subCategory.getError('pattern')}}
+                        </td>
+                        <td>颜色</td>
+                        <td class="invalid_msg">
+                            <input validation #color="validation" [attr.disabled]="waistcoatIsEnabled.value?null:true"
+                                enter maxlength="10" type="text" class="sm" [formControlName]="field.F_COLOR"><br />
+                            {{waistcoat.getError('required'+field.F_COLOR+i)||color.getError('pattern')}}
+                        </td>
+                        <td>布料</td>
+                        <td class="invalid_msg">
+                            <input validation #cloth="validation" [attr.disabled]="waistcoatIsEnabled.value?null:true"
+                                enter maxlength="10" type="text" class="sm" [formControlName]="field.F_CLOTH"><br />
+                            {{waistcoat.getError('required'+field.F_CLOTH+i)||cloth.getError('pattern')}}
+                        </td>
+                        <td>数量</td>
+                        <td class="invalid_msg"><input validation #amount="validation"
+                                [attr.disabled]="waistcoatIsEnabled.value?null:true" enter type="text" class="sm"
+                                maxlength="7" [formControlName]="field.F_AMOUNT"><br />
+                            {{waistcoat.getError('required'+field.F_AMOUNT+i)||amount.getError('number')}}
+                        </td>
+                        <td>加工费</td>
+                        <td class="invalid_msg"><input validation #price="validation"
+                                [attr.disabled]="waistcoatIsEnabled.value?null:true" enter type="text" maxlength="10"
+                                class="sm" [formControlName]="field.F_PRICE"><br />
+                            {{price.getError('number','range')}}
+                        </td>
+                        <td>
+                            <button type="button" class="sm" [disabled]="waistcoatIsEnabled.value?null:true" mat-flat-button
+                                color="primary" (click)="deleteDetail(waistcoats.getControl(), i)">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-tab>
+        <mat-tab validation #accessory="validation" [formGroupName]="field.F_ACCESSORY">
+            <ng-template mat-tab-label>
+                <i [class.fa-exclamation-triangle]="accessory.invalid" class="fa">配件</i>
+            </ng-template>
+            <table class="large border">
+                <thead>
+                    <th colspan="14">
+                        明细
+                    </th>
+                </thead>
+                <tr>
+                    <td class="padding-left"></td>
+                    <td class="label">配件</td>
+                    <td>
+                        <input validation #accessoryIsEnabled="validation" type="checkbox" enter
+                            [formControlName]="field.F_ISENABLED" />&nbsp;
+                        <button type="button" class="sm" [disabled]="accessoryIsEnabled.value?null:true" mat-flat-button
+                            color="primary" (click)="addDetail(accessories.getControl(), '', '', 1, '', '')">添加</button>
+                        <span class="invalid_msg">
+                            {{accessory.getError('requiredDetails')}}
+                        </span></td>
+                    <td colspan="11"></td>
+                </tr>
+                <tbody [class.disabled]="!accessoryIsEnabled.value" validation #accessories="validation"
+                    [formArrayName]="field.F_DETAILS">
+                    <tr class="valign_top" [formGroupName]="i"
+                        *ngFor="let d of accessories.controls; let i=index;let last=last;">
+                        <td></td>
+                        <td>种类</td>
+                        <td class="invalid_msg"><input validation #subCategory="validation"
+                                [attr.disabled]="accessoryIsEnabled.value?null:true" enter maxlength="10" type="text"
+                                class="sm" [formControlName]="field.F_SUBCATEGORY"><br />
+                            {{accessory.getError('required'+field.F_SUBCATEGORY+i)||subCategory.getError('pattern')}}
+                        </td>
+                        <td>尺码</td>
+                        <td class="invalid_msg">
+                            <input validation #sizeName="validation"
+                                [attr.disabled]="accessoryIsEnabled.value?null:true" enter maxlength="10" type="text"
+                                class="sm" [formControlName]="field.F_SIZENAME"><br />
+                            {{accessory.getError('required'+field.F_SIZENAME+i)}}
+                        </td>
+                        <td>颜色</td>
+                        <td class="invalid_msg"><input validation #color="validation"
+                                [attr.disabled]="accessoryIsEnabled.value?null:true" enter maxlength="10" type="text"
+                                class="sm" [formControlName]="field.F_COLOR"><br />
+                            {{accessory.getError('required'+field.F_COLOR+i)||color.getError('pattern')}}
+                        </td>
+                        <td>布料</td>
+                        <td class="invalid_msg">
+                            <input validation #cloth="validation" [attr.disabled]="accessoryIsEnabled.value?null:true"
+                                enter maxlength="10" type="text" class="sm" [formControlName]="field.F_CLOTH"><br />
+                            {{cloth.getError('pattern')}}
+                        </td>
+                        <td>数量</td>
+                        <td class="invalid_msg"><input validation #amount="validation"
+                                [attr.disabled]="accessoryIsEnabled.value?null:true" enter type="text" class="sm"
+                                maxlength="7" [formControlName]="field.F_AMOUNT"><br />
+                            {{accessory.getError('required'+field.F_AMOUNT+i)||amount.getError('number')}}
+                        </td>
+                        <td>加工费</td>
+                        <td class="invalid_msg"><input validation #price="validation"
+                                [attr.disabled]="accessoryIsEnabled.value?null:true" enter type="text" maxlength="10"
+                                class="sm" [formControlName]="field.F_PRICE"><br />
+                            {{price.getError('number','range')}}
+                        </td>
+                        <td>
+                            <button type="button" class="sm" [disabled]="accessoryIsEnabled.value?null:true" mat-flat-button
+                                color="primary" (click)="deleteDetail(accessories.getControl(), i)">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-tab>
+    </mat-tab-group>
+    <button type="button" mat-raised-button color="primary" [disabled]="!form.valid" (click)="save()">提交</button>
+</form>

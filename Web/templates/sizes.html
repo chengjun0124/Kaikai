@@ -1,0 +1,22 @@
+<div class="home_attention" ng-controller="head" ng-include="headTemplate"></div>
+<div><a href="#!/size_edit/">新建</a></div>
+<div class="bigtable">
+    <table>
+        <thead>
+            <tr>
+                <th>尺码表</th>
+                <th>性别</th>
+                <th>删除</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="s in sizes" ng-dblclick="detail(s.sizeId)">
+                <td>{{s.sizeName}}</td>
+                <td>{{s.sex=="M"?"男":"女"}}</td>
+                <td><a ng-click="delete(s.sizeId)">删除</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <tm-pagination conf="paginationConf"></tm-pagination>
+</div>
+

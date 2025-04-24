@@ -1,0 +1,35 @@
+form {
+    table {
+        tbody {
+            &.disabled {
+                td {
+                    color: gray;
+                }
+        
+                a {
+                    cursor: not-allowed;
+                }
+            }
+        }
+        
+        tr {
+            &.align {
+                height: 29px;
+            }
+        }
+        
+        td {
+            &.disabled {
+                color:grey;
+            }
+            
+            &.padding-left {
+                width: 20px;
+            }
+
+            &.label {
+                width: 36px;
+            }
+        }
+    }   
+}

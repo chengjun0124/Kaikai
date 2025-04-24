@@ -1,0 +1,22 @@
+<div class="login_bg">
+    <div class="login_logo">
+        <!--<img src="imgs/logo2.png" />-->
+            开开外贸-订单管理系统
+    </div>
+    <div class="login_fill">
+        <div class="login_fill_name">
+            <!--<img src="imgs/login_name.png" />-->
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <input class="fill_input" name="fill_name" custom-enter="focusPwd()" ng-model="userName" maxlength="16" placeholder="请输入用户名">
+        </div>
+        <div class="login_fill_word">
+            <!--<img src="imgs/login_password.png" />-->
+            <i class="fa fa-lock" aria-hidden="true"></i>
+            <input class="fill_input" type="password" id="txt_password" custom-enter="login()" ng-model="password" maxlength="32" placeholder="请输入密码">
+            <!--<span class="get_code">获取验证码</span>-->
+        </div>
+        <div ng-click="login()" class="login_button">
+            <p>登录</p>
+        </div>
+    </div>
+</div>

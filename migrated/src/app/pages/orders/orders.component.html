@@ -1,0 +1,86 @@
+<head></head>
+<form novalidate [formGroup]="form">
+    <table>
+        <tr>
+            <td>集团</td>
+            <td>
+                <select enter [formControlName]="field.F_GROUP" (change)="changeGroup()">
+                    <option value="">请选择集团</option>
+                    <option *ngFor="let opt of groups" [value]="opt.value">{{opt.text}}</option>
+                </select>
+            </td>
+            <td>公司</td>
+            <td><select enter [formControlName]="field.F_COMPANY" (change)="changeCompany()">
+                    <option value="">请选择公司</option>
+                    <option *ngFor="let opt of companies" [value]="opt.value">{{opt.text}}</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td>部门</td>
+            <td><select enter [formControlName]="field.F_DEPARTMENT">
+                    <option value="">请选择部门</option>
+                    <option *ngFor="let opt of selectedCompany?.departments" [value]="opt.value">{{opt.text}}</option>
+                </select></td>
+            <td>职务</td>
+            <td><select enter [formControlName]="field.F_JOB">
+                    <option value="">请选择职务</option>
+                    <option *ngFor="let opt of selectedCompany?.jobs" [value]="opt.value">{{opt.text}}</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td>工号</td>
+            <td><input type="text" enter [formControlName]="field.F_EMPLOYEE_CODE" /></td>
+            <td>姓名</td>
+            <td><input type="text" enter [formControlName]="field.F_NAME" /></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="ta-c">
+                <button type="button" mat-raised-button color="primary" (click)="search()">搜索</button>
+                <button type="button" mat-raised-button color="primary" (click)="delete()">删除</button>
+                <a mat-raised-button color="primary" routerLink="/order" target="_blank">新建</a>
+                <!-- confirmed, close this functionality. if need re-open, need test this functionality
+                            <input type="button" (click)="sync()" value="同步明细(未保存)" />
+                            <input type="button" (click)="updatebatch()" value="保存明细" /> -->
+            </td>
+        </tr>
+    </table>
+    <table class="border grid large">
+        <thead>
+            <tr>
+                <th>
+                    <input [formControlName]="field.F_IS_SELECTED_ALL" type="checkbox" />
+                </th>
+                <th>集团</th>
+                <th>公司</th>
+                <th>部门</th>
+                <th>职务</th>
+                <th>工号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>身高</th>
+                <th>体重</th>
+            </tr>
+        </thead>
+        <tbody [formArrayName]="field.F_SELECTED_ORDERS">
+            <tr *ngFor="let o of orders;let i=index" (dblclick)="detail(o.orderId)">
+                <td class="ta-c">
+                    <input [formControlName]="i" ng-dblclick="$event.stopPropagation();" type="checkbox"
+                        [value]="o.orderId" /></td>
+                <td>{{o.group}}</td>
+                <td>{{o.company}}</td>
+                <td>{{o.department}}</td>
+                <td>{{o.job}}</td>
+                <td>{{o.employeeCode}}</td>
+                <td>{{o.name}}</td>
+                <td class="ta-r">{{o.age}}</td>
+                <td>{{o.sex=="M"?"男":"女"}}</td>
+                <td class="ta-r">{{o.weight}}</td>
+                <td class="ta-r">{{o.height}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <mat-paginator *ngIf="recordCount>0" [length]="recordCount" showFirstLastButtons="true" [pageSize]="20"
+        [pageSizeOptions]="[10,20,50,100]" (page)="onPageChange($event)">
+    </mat-paginator>
+</form>

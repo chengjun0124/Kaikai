@@ -1,0 +1,237 @@
+<head></head>
+<form novalidate [formGroup]="form">
+    <p class="invalid_msg" *ngIf="isLock">该尺码表已锁定</p>
+    <table class="border">
+        <thead>
+            <th colspan="3">
+                尺码
+            </th>
+        </thead>
+        <tr>
+            <td>尺码表名称</td>
+            <td colspan="2">
+                <input enter validation #sizeTableName="validation" maxlength="10" type="text" [formControlName]="field.F_SIZENAME"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2" class="invalid_msg">{{sizeTableName.getError('required')}}</td>
+        </tr>
+        <tr>
+                <td>分类</td>
+                <td colspan="2">
+                    <select enter validation #category="validation" [formControlName]="field.F_CATEGOTY">
+                        <option value="">请选择分类</option>
+                        <option *ngFor="let opt of categories" [value]="opt.value">{{opt.text}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="invalid_msg">{{category.getError('required')}}</td>
+            </tr>
+        <tr>
+            <td>性别</td>
+            <td colspan="2">
+                <input enter type="radio" [formControlName]="field.F_SEX" value="M" name="sex"> 男
+                <input enter type="radio" value="F" [formControlName]="field.F_SEX" name="sex"> 女 </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg"></td>
+        </tr>
+        <tr>
+            <td>领围范围</td>
+            <td>-<input enter class="s_number" validation #neckScopeL="validation" maxlength="5" [formControlName]="field.F_NECK_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #neckScopeU="validation" maxlength="5" [formControlName]="field.F_NECK_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{neckScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{neckScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+        <tr>
+            <td>肩宽范围</td>
+            <td>-<input enter class="s_number" validation #shoulderScopeL="validation" maxlength="5" [formControlName]="field.F_SHOULDER_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #shoulderScopeU="validation" maxlength="5" [formControlName]="field.F_SHOULDER_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{shoulderScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{shoulderScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+        <tr>
+            <td>前衣长范围</td>
+            <td>-<input enter class="s_number" validation #flengthScopeL="validation" maxlength="5" [formControlName]="field.F_FLENGTH_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #flengthScopeU="validation" maxlength="5" [formControlName]="field.F_FLENGTH_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{flengthScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{flengthScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+        <tr>
+            <td>后衣长范围</td>
+            <td>-<input enter class="s_number" validation #blengthScopeL="validation" maxlength="5" [formControlName]="field.F_BLENGTH_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #blengthScopeU="validation" maxlength="5" [formControlName]="field.F_BLENGTH_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{blengthScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{blengthScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+        <tr>
+            <td>胸围范围</td>
+            <td>-<input enter class="s_number" validation #chestScopeL="validation" maxlength="3" [formControlName]="field.F_CHEST_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #chestScopeU="validation" maxlength="3" [formControlName]="field.F_CHEST_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{chestScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{chestScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+        <tr>
+            <td>腰围范围</td>
+            <td>-<input enter class="s_number" validation #waistScopeL="validation" maxlength="5" [formControlName]="field.F_WAIST_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #waistScopeU="validation" maxlength="5" [formControlName]="field.F_WAIST_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{waistScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{waistScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+        <tr>
+            <td>下摆范围</td>
+            <td>-<input enter class="s_number" validation #lowerhemScopeL="validation" maxlength="5" [formControlName]="field.F_LOWERHEM_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #lowerhemScopeU="validation" maxlength="5" [formControlName]="field.F_LOWERHEM_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{lowerhemScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{lowerhemScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+        <tr>
+            <td>长袖长范围</td>
+            <td>-<input enter class="s_number" validation #lSleeveLengthScopeL="validation" maxlength="5" [formControlName]="field.F_LSLEEVE_LENGTH_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #lSleeveLengthScopeU="validation" maxlength="5" [formControlName]="field.F_LSLEEVE_LENGTH_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{lSleeveLengthScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{lSleeveLengthScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+        <tr>
+            <td>长袖口大范围</td>
+            <td>-<input enter class="s_number" validation #lSleeveCuffScopeL="validation" maxlength="5" [formControlName]="field.F_LSLEEVE_CUFF_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #lSleeveCuffScopeU="validation" maxlength="5" [formControlName]="field.F_LSLEEVE_CUFF_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{lSleeveCuffScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{lSleeveCuffScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+        <tr>
+            <td>短袖长范围</td>
+            <td>-<input enter class="s_number" validation #sSleeveLengthScopeL="validation" maxlength="5" [formControlName]="field.F_SSLEEVE_LENGTH_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #sSleeveLengthScopeU="validation" maxlength="5" [formControlName]="field.F_SSLEEVE_LENGTH_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{sSleeveLengthScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{sSleeveLengthScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+        <tr>
+            <td>短袖口大范围</td>
+            <td>-<input enter class="s_number" validation #sSleeveCuffScopeL="validation" maxlength="5" [formControlName]="field.F_SSLEEVE_CUFF_SCOPE_L" /></td>
+            <td>+<input enter class="s_number" validation #sSleeveCuffScopeU="validation" maxlength="5" [formControlName]="field.F_SSLEEVE_CUFF_SCOPE_U" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{sSleeveCuffScopeL.getError('required', 'number', 'range')}}</td>
+            <td class="invalid_msg">{{sSleeveCuffScopeU.getError('required', 'number', 'range')}}</td>
+        </tr>
+    </table>
+
+    <table class="large border">
+        <thead>
+            <th colspan="14">明细</th>
+        </thead>
+        <tr>
+            <td>尺码</td>
+            <td>尺码别名</td>
+            <td>领围</td>
+            <td>肩宽</td>
+            <td>前衣长</td>
+            <td>后衣长</td>
+            <td>胸围</td>
+            <td>腰围</td>
+            <td>下摆</td>
+            <td>长袖长</td>
+            <td>长袖口大</td>
+            <td>短袖长</td>
+            <td>短袖口大</td>
+            <td><button type="button" class="sm" mat-raised-button color="primary" (click)="addDetail()">添加</button></td>
+        </tr>
+        <tbody [formArrayName]="field.F_SIZEDETAILS" validation #details="validation" class="invalid_msg">
+            <tr [formGroupName]="i" *ngFor="let d of details.controls; let i=index;let last=last;">
+                <td>
+                    <input enter class="s_number" validation #sizeName="validation" maxlength="10"
+                        [formControlName]="field.F_SIZENAME" />
+                    <p>{{sizeName.getError('required', 'pattern') || details.getError('custom'+i)}}</p>
+                </td>
+                <td>
+                    <input enter class="s_number" validation #sizeAlias="validation" maxlength="10"
+                        [formControlName]="field.F_SIZE_ALIAS" />
+                    <p>{{sizeAlias.getError('required', 'pattern')}}</p>
+                </td>
+                <td>
+                    <input enter class="s_number" validation #neck="validation" maxlength="5" [formControlName]="field.F_NECK" />
+                    <p>{{neck.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><input enter class="s_number" validation #shoulder="validation" maxlength="5"
+                        [formControlName]="field.F_SHOULDER" />
+                    <p>{{shoulder.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><input enter class="s_number" validation #flength="validation" maxlength="5"
+                        [formControlName]="field.F_FLENGTH" />
+                    <p>{{flength.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><input enter class="s_number" validation #blength="validation" maxlength="5"
+                        [formControlName]="field.F_BLENGTH" />
+                    <p>{{blength.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><input enter class="s_number" validation #chest="validation" maxlength="3" [formControlName]="field.F_CHEST" />
+                    <p>{{chest.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><input enter class="s_number" validation #waist="validation" maxlength="5" [formControlName]="field.F_WAIST" />
+                    <p>{{waist.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><input enter class="s_number" validation #lowerhem="validation" maxlength="5"
+                        [formControlName]="field.F_LOWERHEM" />
+                    <p>{{lowerhem.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><input enter class="s_number" validation #lSleeveLength="validation" maxlength="5"
+                        [formControlName]="field.F_LSLEEVELENGTH" />
+                    <p>{{lSleeveLength.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><input enter class="s_number" validation #lSleeveCuff="validation" maxlength="5"
+                        [formControlName]="field.F_LSLEEVECUFF" />
+                    <p>{{lSleeveCuff.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><input enter class="s_number" validation #sSleeveLength="validation" maxlength="5"
+                        [formControlName]="field.F_SSLEEVELENGTH" />
+                    <p>{{sSleeveLength.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><input enter class="s_number" validation #sSleeveCuff="validation" maxlength="5"
+                        [formControlName]="field.F_SSLEEVECUFF" />
+                    <p>{{sSleeveCuff.getError('required', 'number', 'range')}}</p>
+                </td>
+                <td><button type="button" class="sm" [disabled]="details.controls.length===1" mat-flat-button color="primary"
+                        (click)="deleteDetail(i)">删除</button></td>
+            </tr>
+            <tr>
+                <td class="invalid_msg" colspan="14"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" mat-raised-button color="primary" [disabled]="!form.valid || isLock" (click)="save()">提交</button>
+</form>

@@ -1,0 +1,22 @@
+<div class="home_attention" ng-controller="head" ng-include="headTemplate"></div>
+<div><a href="#!/user_edit/">新建</a></div>
+<div class="bigtable">
+    <table>
+        <thead>
+            <tr>
+                <th>用户名</th>
+                <th>用户类型</th>
+                <th>删除</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="u in users" ng-dblclick="detail(u.userId)">
+                <td>{{u.userName}}</td>
+                <td>{{u.userTypeId|toUserType}}</td>
+                <td><a ng-click="delete(u.userId)">删除</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <tm-pagination conf="paginationConf"></tm-pagination>
+</div>
+

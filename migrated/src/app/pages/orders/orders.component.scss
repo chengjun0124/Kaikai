@@ -1,0 +1,13 @@
+button {
+    display: inline-block!important;
+    margin-left: 10px!important;
+    margin-right: 10px!important;
+}
+
+a {
+    &[mat-raised-button] {
+        width: 100px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

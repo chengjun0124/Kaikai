@@ -1,0 +1,15 @@
+<div mat-dialog-title>
+    <p class="tan_title">提示</p>
+    <p class="tan_close"><img (click)="close()" src="assets/imgs/s_delete.png" /></p>
+</div>
+<p mat-dialog-content class="tan_txt">{{data.content}}</p>
+<div mat-dialog-actions class="tan_button" *ngIf="data.buttonCount==2">
+    <button type="button" mat-raised-button color="primary" (click)="confirm()">确认</button>
+    <button type="button" mat-raised-button #cancel color="primary" (click)="close()">取消</button>
+    <!-- <p class="button" (click)="confirm()" style="float:left;">确认</p>
+    <p class="button" (click)="close()" #cancel style="float: right;">取消</p> -->
+</div>
+<div mat-dialog-actions class="tan_button" (click)="close()"  *ngIf="data.buttonCount==1">
+    <!-- <p class="button">确认</p> -->
+    <button type="button" mat-raised-button color="primary" (click)="close()">确认</button>
+</div>

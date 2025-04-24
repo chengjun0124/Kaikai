@@ -1,0 +1,26 @@
+<head></head>
+<button mat-raised-button color="primary" class="lg" (click)="create()">新建</button>
+<table class="border grid">
+    <thead>
+        <tr>
+            <th>尺码表</th>
+            <th>分类</th>
+            <th>性别</th>
+            <th>删除</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let s of sizes" (dblclick)="detail(s.sizeId)">
+            <td>{{s.sizeName}}</td>
+            <td>{{s.category}}</td>
+            <td>{{s.sex=="M"?"男":"女"}}</td>
+            <td class="ta-c">
+                <ng-container *ngIf="s.isLocked">已锁定</ng-container>
+                <button *ngIf="!s.isLocked" mat-raised-button color="primary" class="sm" (click)="delete(s.sizeId)">删除</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<mat-paginator *ngIf="recordCount>0" [length]="recordCount" showFirstLastButtons="true" [pageSize]="20"
+    [pageSizeOptions]="[10,20,50,100]" (page)="onPageChange($event)">
+</mat-paginator>

@@ -1,0 +1,23 @@
+<head></head>
+<button mat-raised-button color="primary" class="lg" (click)="create()">新建</button>
+<table class="border grid">
+    <thead>
+        <tr>
+            <th>用户名</th>
+            <th>用户类型</th>
+            <th>删除</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let u of users" (dblclick)="detail(u.userId)">
+            <td>{{u.username}}</td>
+            <td>{{u.userTypeId|toUserType}}</td>
+            <td class="ta-c">
+                <button mat-raised-button color="primary" class="sm" (click)="delete(u.userId)">删除</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<mat-paginator *ngIf="recordCount>0" [length]="recordCount" showFirstLastButtons="true" [pageSize]="20"
+    [pageSizeOptions]="[10,20,50,100]" (page)="onPageChange($event)">
+</mat-paginator>

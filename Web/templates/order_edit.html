@@ -1,0 +1,720 @@
+<div class="home_attention" ng-controller="head" ng-include="headTemplate"></div>
+
+
+<!--使用table的表单-->
+<div class="form">
+    <table>
+        <tr>
+            <td>集团名称</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="20"
+                    fieldName="集团名称"
+                    validation="required|||pattern:::^[^\\/:*?&quot;<>|]+$:::不能包含\/:*?&quot;<>|"
+                    mentionId="td_m_group"
+                    ng-model="order.group"></td>
+            <td>公司名称</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="20"
+                    fieldName="公司名称"
+                    validation="required|||pattern:::^[^\\/:*?&quot;<>|]+$:::不能包含\/:*?&quot;<>|"
+                    mentionId="td_m_company"
+                    ng-model="order.company"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_group"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_company"></td>
+        </tr>
+        <tr>
+            <td>部门</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="20"
+                    fieldName="部门"
+                    validation="required"
+                    mentionId="td_m_department"
+                    ng-model="order.department"></td>
+            <td>职务</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="20"
+                    fieldName="职务"
+                    mentionId="td_m_job"
+                    ng-model="order.job"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_department"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_job"></td>
+        </tr>
+        <tr>
+            <td>工号</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="20"
+                    fieldName="工号"
+                    validation="pattern:::^[a-zA-Z0-9]+$:::只能包含字母和数字"
+                    mentionId="td_m_employee_code"
+                    ng-model="order.employeeCode"></td>
+            <td>姓名</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="30"
+                    fieldName="姓名"
+                    validation="required"
+                    mentionId="td_m_name"
+                    ng-model="order.name"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_employee_code"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_name"></td>
+        </tr>
+        <tr>
+            
+            <td>年龄</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="3"
+                    fieldName="年龄"
+                    validation="number:::0|||range:::1-150"
+                    mentionId="td_m_age"
+                    ng-model="order.age"></td>
+            <td>性别</td>
+            <td>
+                <input type="radio" enter ng-model="order.sex" value="M" ng-change="clearSize(true,true,true)" name="sex">男<input type="radio" ng-change="clearSize(true,true,true)" enter value="F" ng-model="order.sex" name="sex">女</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_age"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_sex"></td>
+        </tr>
+        <tr>
+            
+            <td>身高</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="5"
+                    fieldName="身高"
+                    validation="number:::1|||range:::1-999.9"
+                    mentionId="td_m_height"
+                    ng-model="order.height"></td>
+            <td>体重</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="5"
+                    fieldName="体重"
+                    validation="number:::1|||range:::1-999.9"
+                    mentionId="td_m_weight"
+                    ng-model="order.weight"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_height"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_weight"></td>
+        </tr>
+        <tr>
+            
+            <td>尺码</td>
+            <td><input class="input_edit" maxlength="10" enter type="text" ng-change="clearSize(false,true,false)" ng-model="order.sizeName" /></td>
+            <td>领围</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="领围"
+                    validation="{{hasSizeName()==true?'':'required|||'}}number:::1|||range:::1-999.9"
+                    mentionId="td_m_neck"
+                    ng-model="order.neck"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_neck"></td>
+        </tr>
+        <tr>
+            
+            <td>肩宽</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="肩宽"
+                    validation="{{hasSizeName()==true?'':'required|||'}}number:::1|||range:::1-999.9"
+                    mentionId="td_m_shoulder"
+                    ng-model="order.shoulder"></td>
+            <td>前衣长</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="前衣长"
+                    validation="{{hasSizeName()==true?'':'oneisrequired:::txt_blength:::后衣长|||'}}number:::1|||range:::1-999.9"
+                    mentionId="td_m_flength"
+                    ng-model="order.fLength"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_shoulder"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_flength"></td>
+        </tr>
+        <tr>
+            
+            <td>后衣长</td>
+            <td>
+                <input class="input_edit" id="txt_blength" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="后衣长"
+                    validation="number:::1|||range:::1-999.9"
+                    mentionId="td_m_blength"
+                    ng-model="order.bLength"></td>
+            <td>胸围</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="胸围"
+                    validation="{{hasSizeName()==true?'':'required|||'}}number:::0|||range:::1-999"
+                    mentionId="td_m_chest"
+                    ng-model="order.chest"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_blength"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_chest"></td>
+        </tr>
+        <tr>
+            
+            <td>腰围</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="腰围"
+                    validation="number:::1|||range:::1-999.9"
+                    mentionId="td_m_waist"
+                    ng-model="order.waist"></td>
+            <td>下摆</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="下摆"
+                    validation="number:::1|||range:::1-999.9"
+                    mentionId="td_m_lowerhem"
+                    ng-model="order.lowerHem"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_waist"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_lowerhem"></td>
+        </tr>
+        <tr>
+            
+            <td>喜好</td>
+            <td>
+                <input enter type="radio" value="B" ng-model="order.preSize" name="preSize">偏大<input enter ng-model="order.preSize" type="radio" value="S" name="preSize">偏小</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_presize"></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>长袖长</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="长袖长"
+                    validation="{{order.hasLongSleeve&&hasSizeName()==false?'required|||':''}}number:::1|||range:::1-999.9"
+                    mentionId="td_m_lsleevelength"
+                    ng-model="order.lSleeveLength"></td>
+            <td>长袖口大</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="长袖口大"
+                    validation="number:::1|||range:::1-999.9"
+                    mentionId="td_m_lsleevecuff"
+                    ng-model="order.lSleeveCuff"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_lsleevelength"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_lsleevecuff"></td>
+        </tr>
+        <tr>
+            <td>长袖加工费</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="10"
+                    fieldName="长袖加工费"
+                    validation="number:::2|||range:::1-9999999.99"
+                    mentionId="td_m_lprice"
+                    ng-model="order.lPrice"></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_lprice"></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>短袖长</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="短袖长"
+                    validation="{{order.hasShortSleeve&&hasSizeName()==false?'required|||':''}}number:::1|||range:::1-999.9"
+                    mentionId="td_m_ssleevelength"
+                    ng-model="order.sSleeveLength"></td>
+            <td>短袖口大</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="5"
+                    fieldName="短袖口大"
+                    validation="number:::1|||range:::1-999.9"
+                    mentionId="td_m_ssleevecuff"
+                    ng-model="order.sSleeveCuff"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_ssleevelength"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_ssleevecuff"></td>
+        </tr>
+        <tr>
+            <td>短袖加工费</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    maxlength="10"
+                    fieldName="短袖加工费"
+                    validation="number:::2|||range:::1-9999999.99"
+                    mentionId="td_m_sprice"
+                    ng-model="order.sPrice"></td>
+            <td>胸围放大</td>
+            <td><input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="2"
+                    fieldName="胸围放大"
+                    validation="number:::0|||range:::0-50"
+                    mentionId="td_m_chestenlarge"
+                    ng-model="order.chestEnlarge"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_sprice"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_chestenlarge"></td>
+        </tr>
+        <tr>
+            <td>腰围放大</td>
+            <td>
+                <input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="2"
+                    fieldName="腰围放大"
+                    validation="number:::0|||range:::0-50"
+                    mentionId="td_m_waistenlarge"
+                    ng-model="order.waistEnlarge"></td>
+            <td>下摆放大</td>
+            <td><input class="input_edit" type="text"
+                    enter
+                    ng-change="clearSize(true,false,false)"
+                    maxlength="2"
+                    fieldName="下摆放大"
+                    validation="number:::0|||range:::0-50"
+                    mentionId="td_m_lowerhemenlarge"
+                    ng-model="order.lowerHemEnlarge"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_waistenlarge"></td>
+            <td></td>
+            <td class="invalid_msg" id="td_m_lowerhemenlarge"></td>
+        </tr>
+        <tr>
+            <td>备注</td>
+            <td>
+                <input class="input_edit" enter maxlength="500" ng-model="order.memo" />
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_memo"></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+
+<div class="form">
+    <table>
+        <tr>
+            <td>长袖</td>
+            <td>
+                <input type="checkbox"
+                    id="chk_lsleeve"
+                    enter
+                    fieldName="长袖"
+                    validation="oneisrequired:::chk_short:::短袖"
+                    mentionId="td_m_longsleeve"
+                    ng-model="order.hasLongSleeve">&nbsp;<span class="invalid_msg" id="td_m_longsleeve"></span></td>
+            <td colspan="6"></td>
+        </tr>
+        <tbody ng-class="{diableSleeve:!order.hasLongSleeve}">
+            <tr class="valign_top" ng-repeat="d in order.orderDetails|filter:{isLongSleeve:true}">
+                <td>颜色</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasLongSleeve"
+                        enter
+                        maxlength="10"
+                        fieldName="颜色"
+                        validation="{{isOrderDetailRequired(true)?'required|||':''}}pattern:::^[a-zA-Z0-9\u4e00-\u9fa5]+$:::只能包含字母，数字和中文"
+                        mentionId="td_lcolor_{{$index}}"
+                        type="text" ng-model="d.color"><br />
+                    <span class="invalid_msg" id="td_lcolor_{{$index}}"></span>
+                </td>
+                <td>布料</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasLongSleeve"
+                        enter
+                        maxlength="10"
+                        fieldName="布料"
+                        validation="{{isOrderDetailRequired(true)?'required|||':''}}pattern:::^[a-zA-Z0-9/\-()~$]+$:::只能包含字母,数字和/-()~"
+                        mentionId="td_lcloth_{{$index}}"
+                        type="text" ng-model="d.cloth"><br />
+                    <span class="invalid_msg" id="td_lcloth_{{$index}}"></span></td>
+                <td>数量</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasLongSleeve" type="text"
+                        enter
+                        maxlength="7"
+                        fieldName="数量"
+                        validation="required|||number:::0"
+                        mentionId="td_lamount_{{$index}}"
+                        ng-model="d.amount"><br />
+                    <span class="invalid_msg" id="td_lamount_{{$index}}"></span></td>
+                <td ng-if="isShowDelete(true)" ng-click="deleteDetail(order.hasLongSleeve,d)">删除</td>
+                <td><span ng-if="$last" ng-click="addDetail(true,order.hasLongSleeve)">添加</span></td>
+            </tr>
+            <!--<tr ng-repeat="d in order.orderDetails|filter:{isLongSleeve:true}">
+                <td></td>
+                <td class="invalid_msg" id="td_lcolor_{{$index}}"></td>
+                <td></td>
+                <td class="invalid_msg" id="td_lcloth_{{$index}}"></td>
+                <td></td>
+                <td class="invalid_msg" id="td_lamount_{{$index}}"></td>
+                <td></td>
+                <td></td>
+            </tr>-->
+        </tbody>
+    </table>
+</div>
+<div class="form">
+    <table>
+        <tr>
+            <td>短袖</td>
+            <td>
+                <input enter type="checkbox" id="chk_short" ng-model="order.hasShortSleeve">&nbsp;<span class="invalid_msg" id="td_m_shortsleeve"></span></td>
+            <td colspan="6"></td>
+        </tr>
+        <tbody ng-class="{diableSleeve:!order.hasShortSleeve}">
+            <tr  class="valign_top" ng-repeat="d in order.orderDetails|filter:{isLongSleeve:false}">
+                <td>颜色</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasShortSleeve"
+                        enter
+                        maxlength="10"
+                        fieldName="颜色"
+                        validation="{{isOrderDetailRequired(false)?'required|||':''}}pattern:::^[a-zA-Z0-9\u4e00-\u9fa5]+$:::只能包含字母，数字和中文"
+                        mentionId="td_scolor_{{$index}}"
+                        type="text" ng-model="d.color">
+                    <br />
+                    <span class="invalid_msg" id="td_scolor_{{$index}}"></span>
+                </td>
+                <td>布料</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasShortSleeve" type="text"
+                        enter
+                        maxlength="10"
+                        fieldName="布料"
+                        validation="{{isOrderDetailRequired(false)?'required|||':''}}pattern:::^[a-zA-Z0-9/\-()~]+$:::只能包含字母,数字和/-()~"
+                        mentionId="td_scloth_{{$index}}"
+                        ng-model="d.cloth">
+                    <br />
+                    <span class="invalid_msg" id="td_scloth_{{$index}}"></span>
+                </td>
+                <td>数量</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasShortSleeve" type="text"
+                        enter
+                        maxlength="7"
+                        fieldName="数量"
+                        validation="required|||number:::0"
+                        mentionId="td_samount_{{$index}}"
+                        ng-model="d.amount"><br />
+                    <span class="invalid_msg" id="td_samount_{{$index}}"></span></td>
+                <td ng-if="isShowDelete(false)" ng-click="deleteDetail(order.hasShortSleeve,d)">删除</td>
+                <td><span ng-if="$last" ng-click="addDetail(false,order.hasShortSleeve)">添加</span></td>
+            </tr>
+            <!--<tr ng-repeat="d in order.orderDetails|filter:{isLongSleeve:false}">
+                <td></td>
+                <td class="invalid_msg" id="td_scolor_{{$index}}"></td>
+                <td></td>
+                <td class="invalid_msg" id="td_scloth_{{$index}}"></td>
+                <td></td>
+                <td class="invalid_msg" id="td_samount_{{$index}}"></td>
+                <td></td>
+                <td></td>
+            </tr>-->
+        </tbody>
+    </table>
+</div>
+
+<!--使用div的表单
+<div class="form">
+    <ul>
+        <li class="left">
+            <div>
+                公司名称
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="txt_serviceName" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="right">
+            <div>
+                部门
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text1" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                职务
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text2" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="right">
+            <div>
+                工号
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text3" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                姓名
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text4" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="right">
+            <div>
+                年龄
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text5" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                性别
+            </div>
+            <div>
+                
+            </div>
+        </li>
+        <li class="right">
+            <div>
+                身高
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text7" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                体重
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text8" ng-model="service.serviceName">
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="form">
+    <ul>
+        <li class="right">
+            <div>
+                领围
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text9" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                肩宽
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text10" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="right">
+            <div>
+                前衣长
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text11" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                后衣长
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text12" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="right">
+            <div>
+                胸围
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text13" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                腰围
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text14" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="right">
+            <div>
+                下摆
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text15" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                袖子
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text16" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="right">
+            <div>
+                长袖长
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text17" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                长袖口大
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text18" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="right">
+            <div>
+                短袖长
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text19" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                短袖口大
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text20" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="right">
+            <div>
+                喜好
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text21" ng-model="service.serviceName">
+            </div>
+        </li>
+        <li class="left">
+            <div>
+                备注
+            </div>
+            <div>
+                <input class="input_edit" type="text" id="Text22" ng-model="service.serviceName">
+            </div>
+        </li>
+    </ul>
+</div>-->
+<input type="button" value="提交" validate-click="submit()" />
+<!--<div class="submit" validate-click="submit()">
+    <p>提交</p>
+</div>-->

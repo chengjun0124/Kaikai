@@ -1,0 +1,49 @@
+<head></head>
+<form novalidate [formGroup]="form">
+    <table class="border">
+        <thead>
+            <th colspan="2">
+                用户
+            </th>
+        </thead>
+        <tr>
+            <td>用户名</td>
+            <td>
+                <input maxlength="16" type="text" enter validation #username="validation"
+                    [formControlName]="field.F_USERNAME">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{username.getError('required', 'pattern')}}</td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td>
+                <input maxlength="16" [placeholder]="userId===null?'':'不改密码请留空'" enter
+                    type="password" validation #password="validation" [formControlName]="field.F_PASSWORD">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{form.getError('requiredPassword') || password.getError('minlengh', 'pattern')}}</td>
+        </tr>
+        <tr>
+            <td>确认密码</td>
+            <td><input maxlength="16" [placeholder]="userId===null?'':'不改密码请留空'" enter validation #confirmPassword="validation"
+                    [formControlName]="field.F_CONFIRM_PASSWORD" type="password"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">{{form.getError('compare')}}</td>
+        </tr>
+        <tr>
+            <td>用户类型</td>
+            <td><select enter [formControlName]="field.F_USER_TYPE_ID">
+                    <option *ngFor="let opt of userTypes" [value]="opt.value">{{opt.text}}</option>
+                </select></td>
+        </tr>
+    </table>
+    <button type="button" mat-raised-button color="primary" [disabled]="!form.valid"
+        (click)="save()">提交</button>
+</form>

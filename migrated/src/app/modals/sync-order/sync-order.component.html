@@ -1,0 +1,100 @@
+<form novalidate [formGroup]="form">
+    <div class="form">
+        <table>
+            <tr>
+                <td>长袖</td>
+                <td>
+                    <input type="checkbox" enter fieldName="长袖" formControlName="hasLongSleeve">&nbsp;<span
+                        class="invalid_msg">
+                        <ng-container *ngIf="form.hasError('oneisrequired')">长袖和短袖至少填写一个</ng-container>
+                    </span>
+                </td>
+                <td colspan="6"></td>
+            </tr>
+            <tbody [class.disabled]="!form.get('hasLongSleeve').value">
+                <tr class="valign_top" formArrayName="longSleeves"
+                    *ngFor="let d of getFormArray('longSleeves').controls; let i=index;let last=last;">
+                    <ng-container [formGroupName]="i">
+                        <td>颜色</td>
+                        <td>
+                            <input [attr.disabled]="form.get('hasLongSleeve').value?null:true" enter
+                                maxlength="10" type="text" formControlName="color"><br />
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('longSleeves').hasError('requiredcolor'+i)">请输入颜色</span>
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('longSleeves['+i+'].color').hasError('pattern')">颜色只能包含字母，数字和中文</span>
+                        </td>
+                        <td>布料</td>
+                        <td>
+                            <input [attr.disabled]="form.get('hasLongSleeve').value?null:true" enter
+                                maxlength="10" type="text" formControlName="cloth"><br />
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('longSleeves').hasError('requiredcloth'+i)">请输入布料</span>
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('longSleeves['+i+'].cloth').hasError('pattern')">布料只能包含字母,数字和/-()~</span>
+                        </td>
+                        <td>数量</td>
+                        <td>
+                            <input [attr.disabled]="form.get('hasLongSleeve').value?null:true" type="text" enter maxlength="7" formControlName="amount"><br />
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('longSleeves['+i+'].amount').hasError('required')">请输入数量</span>
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('longSleeves['+i+'].amount').hasError('number')">数量必须是整数</span>
+                        </td>
+                        <td *ngIf="isShowDelete(true)"><a
+                                (click)="form.get('hasLongSleeve').value?deleteDetail(true, i):null">删除</a></td>
+                        <td><a *ngIf="last"
+                                (click)="form.get('hasLongSleeve').value?addDetail(true,'','',1):null">添加</a></td>
+                    </ng-container>
+                </tr>
+                <tr>
+                    <td>短袖</td>
+                    <td>
+                        <input enter type="checkbox" id="chk_short" formControlName="hasShortSleeve">&nbsp;<span
+                            class="invalid_msg" id="td_m_shortsleeve"></span></td>
+                    <td colspan="6"></td>
+                </tr>
+            <tbody [class.disabled]="!form.get('hasShortSleeve').value">
+                <tr class="valign_top" formArrayName="shortSleeves"
+                    *ngFor="let d of getFormArray('shortSleeves').controls; let i=index;let last=last;">
+                    <ng-container [formGroupName]="i">
+                        <td>颜色</td>
+                        <td>
+                            <input [attr.disabled]="form.get('hasShortSleeve').value?null:true" enter
+                                maxlength="10" type="text" formControlName="color">
+                            <br />
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('shortSleeves').hasError('requiredcolor'+i)">请输入颜色</span>
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('shortSleeves['+i+'].color').hasError('pattern')">颜色只能包含字母，数字和中文</span>
+                        </td>
+                        <td>布料</td>
+                        <td>
+                            <input [attr.disabled]="form.get('hasShortSleeve').value?null:true"
+                                type="text" enter maxlength="10" formControlName="cloth">
+                            <br />
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('shortSleeves').hasError('requiredcloth'+i)">请输入布料</span>
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('shortSleeves['+i+'].cloth').hasError('pattern')">布料只能包含字母,数字和/-()~</span>
+                        </td>
+                        <td>数量</td>
+                        <td>
+                            <input [attr.disabled]="form.get('hasShortSleeve').value?null:true"
+                                type="text" enter maxlength="7" formControlName="amount"><br />
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('shortSleeves['+i+'].amount').hasError('required')">请输入数量</span>
+                            <span class="invalid_msg"
+                                *ngIf="getFormControl('shortSleeves['+i+'].amount').hasError('number')">数量必须是整数</span>
+                        </td>
+                        <td *ngIf="isShowDelete(false)"><a
+                                (click)="form.get('hasShortSleeve').value?deleteDetail(false, i):null">删除</a></td>
+                        <td><a *ngIf="last"
+                                (click)="form.get('hasShortSleeve').value?addDetail(false,'','',1):null">添加</a></td>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="button" (click)="sync()" [disabled]="!form.valid" value="同步" />
+</form>

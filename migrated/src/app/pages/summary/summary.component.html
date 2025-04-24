@@ -1,0 +1,71 @@
+<head></head>
+<form novalidate [formGroup]="form">
+    <table class="border">
+        <thead>
+            <th colspan="2">
+                报表
+            </th>
+        </thead>
+        <tr>
+            <td>公司名称</td>
+            <td>
+                <select validation #company="validation" [formControlName]="field.F_COMPANY">
+                    <option value="">请选择</option>
+                    <option *ngFor="let opt of companies" [value]="opt">{{opt}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">
+                {{company.getError('required')}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>分类</td>
+            <td>
+                <select validation #category="validation" (change)="changeCategory()" [formControlName]="field.F_CATEGOTY">
+                    <option value="">请选择分类</option>
+                    <option *ngFor="let opt of categories" [value]="opt.value">{{opt.text}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">
+                {{category.getError('required')}}
+            </td>
+        </tr>
+        
+        <tr>
+            <td>男装尺码</td>
+            <td>
+                <select validation #manSizeId="validation" [formControlName]="field.F_MAN_SIZE_ID">
+                    <option value="">请选择</option>
+                    <option *ngFor="let opt of selectedCategory?.manSizes" [value]="opt.value">{{opt.text}}</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">
+                {{manSizeId.getError('required')}}
+            </td>
+        </tr>
+        <tr>
+            <td>女装尺码</td>
+            <td>
+                <select validation #womanSizeId="validation" [formControlName]="field.F_WOMAN_SIZE_ID">
+                    <option value="">请选择</option>
+                    <option *ngFor="let opt of selectedCategory?.womanSizes" [value]="opt.value">{{opt.text}}</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg">
+                {{womanSizeId.getError('required')}}
+            </td>
+        </tr>
+    </table>
+    <button type="button" mat-raised-button color="primary" [disabled]="!form.valid" (click)="export()">导出</button>
+</form>

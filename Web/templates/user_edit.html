@@ -1,0 +1,57 @@
+<div class="home_attention" ng-controller="head" ng-include="headTemplate"></div>
+<div class="form">
+    <table>
+        <tr>
+            <td>用户名</td>
+            <td>
+                <input class="input_edit" maxlength="16" type="text" enter fieldName="用户名" mentionId="td_m_username" validation="required|||pattern:::^[0-9a-zA-Z]+$:::只能包含字母和数字" ng-model="user.userName"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_username"></td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td>
+                <input class="input_edit" id="txt_pwd" maxlength="16" placeholder="{{isCreate?'':'不改密码请留空'}}" 
+                    enter
+                    fieldName="密码" 
+                    validation="{{isCreate?'required|||':''}}minlengh:::8|||pattern:::[a-zA-Z]:::至少包含一个字母|||pattern:::[0-9]:::至少包含一个数字"
+                    mentionId="td_m_password" type="password" ng-model="user.password"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_password"></td>
+        </tr>
+        <tr>
+            <td>确认密码</td>
+            <td>
+                <input class="input_edit" maxlength="16" placeholder="{{isCreate?'':'不改密码请留空'}}" 
+                    enter
+                    fieldName="确认密码" 
+                    mentionId="td_m_confirm_password"
+                    validation="compare:::txt_pwd:::equal:::true:::密码"
+                    type="password"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_confirm_password"></td>
+        </tr>
+        <tr>
+            <td>用户类型</td>
+            <td>
+                <select enter ng-model="user.userTypeId" ng-options="item.id as item.name for item in userTypes"></select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_usertype"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" value="提交" validate-click="submit()" />
+            </td>
+        </tr>
+    </table>
+</div>

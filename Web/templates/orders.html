@@ -1,0 +1,105 @@
+<div class="home_attention" ng-controller="head" ng-include="headTemplate"></div>
+<div><a href="#!/order_edit/" target="_blank">新建</a></div>
+<div>
+    公司<select ng-model="searchParam.company" id="sel_company" ng-change="changeCompany()">
+        <option value="">请选择公司</option>
+        <option ng-repeat="o in companies" value="{{o.value}}">{{o.text}}</option>
+    </select>
+    部门<select ng-model="searchParam.department">
+        <option value="">请选择部门</option>
+        <option ng-repeat="o in selectedCompany.departments">{{o.text}}</option>
+    </select>
+    职务<select ng-model="searchParam.job">
+        <option value="">请选择职务</option>
+        <option ng-repeat="o in selectedCompany.jobs">{{o.text}}</option>
+    </select>
+    工号<input type="text" enter ng-model="searchParam.employeeCode" />
+    姓名<input type="text" enter ng-model="searchParam.name" />
+    <input type="button" ng-click="search()" value="搜索" />
+    <button ng-click="delete()">删除</button>
+    <button ng-click="sync()">同步明细(未保存)</button>
+    <button ng-click="updatebatch()">保存明细</button>
+</div>
+<div class="bigtable">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <input id="chk_all" type="checkbox" ng-click="selectAll()" /></th>
+                <th>公司</th>
+                <th>部门</th>
+                <th>职务</th>
+                <!--<th>工号</th>-->
+                <th>姓名</th>
+                <!--<th>年龄</th>-->
+                <th>性别</th>
+                <th>身高	</th>
+                <!--<th>体重</th>-->
+                <th>尺码</th>
+                <th>领围	</th>
+                <th>肩宽	</th>
+                <th>胸围	</th>
+                <th>变量</th>
+                <th>腰围	</th>
+                <th>变量</th>
+                <th>下摆</th>
+                <th>变量</th>
+                <th>前衣长</th>
+                <th>后衣长</th>                
+                <th>长袖长</th>
+                <th>短袖长</th>
+                <th>长袖口大</th>
+                <th>短袖口大</th>
+                <th>长袖加工费</th>
+                <!--<th>长袖</th>-->
+                <th>长袖数量</th>                
+                <th>短袖加工费</th>
+                <!--<th>短袖</th>-->
+                <th>短袖数量</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="o in orders" ng-dblclick="detail(o.orderId)">
+                <td>
+                    <input name="chk_order_id" ng-dblclick="$event.stopPropagation();" type="checkbox" value="{{o.orderId}}" /></td>
+                <td>{{o.company}}</td>
+                <td>{{o.department}}</td>
+                <td>{{o.job}}</td>
+                <!--<td>{{o.employeeCode}}</td>-->
+                <td>{{o.name}}</td>
+                <!--<td>{{o.age}}</td>-->
+                <td>{{o.sex=="M"?"男":"女"}}</td>
+                <td>{{o.height}}</td>
+                <!--<td>{{o.weight}}</td>-->
+                <td>{{o.sizeName}}</td>
+                <td>{{o.neck}}</td>
+                <td>{{o.shoulder}}</td>
+                <td>{{o.chest}}</td>
+                <td>{{o.chestEnlarge}}</td>
+                <td>{{o.waist}}</td>
+                <td>{{o.waistEnlarge}}</td>
+                <td>{{o.lowerHem}}</td>
+                <td>{{o.lowerHemEnlarge}}</td>
+                <td>{{o.fLength}}</td>
+                <td>{{o.bLength}}</td>
+                <td>{{o.lSleeveLength}}</td>
+                <td>{{o.sSleeveLength}}</td>
+                <td>{{o.lSleeveCuff}}</td>
+                <td>{{o.sSleeveCuff}}</td>
+                <td>{{o.lPrice}}</td>
+                <!--<td><input type="checkbox"
+                    ng-model="o.hasLongSleeve"></td>-->
+                <td>
+                    <nobr ng-show="o.hasLongSleeve==true" ng-repeat="l in o.orderDetails|filter:{isLongSleeve:true}">颜色:{{l.color}} 布料:{{l.cloth}} 数量:{{l.amount}}<br /></nobr>
+                </td>
+                <td>{{o.sPrice}}</td>
+                <!--<td><input type="checkbox"
+                    ng-model="o.hasShortSleeve"></td>-->
+                <td>
+                    <nobr ng-show="o.hasShortSleeve==true" ng-repeat="l in o.orderDetails|filter:{isLongSleeve:false}">颜色:{{l.color}} 布料:{{l.cloth}} 数量:{{l.amount}}<br /></nobr>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <tm-pagination conf="paginationConf"></tm-pagination>
+</div>

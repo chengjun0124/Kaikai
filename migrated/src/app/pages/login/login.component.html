@@ -1,0 +1,18 @@
+<form novalidate [formGroup]="form" (ngSubmit)="submit()">
+    <div class="login_bg">
+        <div class="login_logo">
+            开开外贸-订单管理系统
+        </div>
+        <div class="login_fill">
+            <div class="login_fill_name">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <input type="text" [formControlName]="field.F_USERNAME" maxlength="16" placeholder="请输入用户名">
+            </div>
+            <div class="login_fill_word">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <input type="password" [formControlName]="field.F_PASSWORD" maxlength="32" placeholder="请输入密码">
+            </div>
+            <input type="submit" value="登录">
+        </div>
+    </div>
+</form>

@@ -1,0 +1,50 @@
+// .ngdialog-theme-syncorderdetail
+// {
+//     .ngdialog-content{
+//         top: 0;
+//         left: 0;
+//         right: 0;
+//         bottom: 0;
+//         margin: auto;
+//         width:750px;
+//         height:400px;
+//         position: fixed;
+//         background: #ebeff2;
+//         overflow:auto;
+//     }
+
+// }
+
+
+.ngdialog-theme-syncorderdetail
+{
+    .ngdialog-content{
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width:750px;
+        height:400px;
+        position: fixed;
+        background: #ebeff2;
+        overflow:auto;
+    }
+
+}
+
+tbody {
+    &.disabled {
+        td {
+            color: gray;
+        }
+
+        a {
+            cursor: not-allowed;
+        }
+    }
+
+    a {
+        cursor: pointer;
+    }
+}

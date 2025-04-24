@@ -1,0 +1,99 @@
+<div class="form">
+    <table>
+        <tr>
+            <td>长袖</td>
+            <td>
+                <input type="checkbox"
+                    id="chk_lsleeve"
+                    enter
+                    fieldName="长袖"
+                    validation="oneisrequired:::chk_short:::短袖"
+                    mentionId="td_m_longsleeve"
+                    ng-model="order.hasLongSleeve">&nbsp;<span class="invalid_msg" id="td_m_longsleeve"></span></td>
+            <td colspan="6"></td>
+        </tr>
+        <tbody ng-class="{diableSleeve:!order.hasLongSleeve}">
+            <tr class="valign_top" ng-repeat="d in order.orderDetails|filter:{isLongSleeve:true}">
+                <td>颜色</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasLongSleeve"
+                        enter
+                        maxlength="10"
+                        fieldName="颜色"
+                        validation="{{isOrderDetailRequired(true)?'required|||':''}}pattern:::^[a-zA-Z0-9\u4e00-\u9fa5]+$:::只能包含字母，数字和中文"
+                        mentionId="td_lcolor_{{$index}}"
+                        type="text" ng-model="d.color"><br />
+                    <span class="invalid_msg" id="td_lcolor_{{$index}}"></span>
+                </td>
+                <td>布料</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasLongSleeve"
+                        enter
+                        maxlength="10"
+                        fieldName="布料"
+                        validation="{{isOrderDetailRequired(true)?'required|||':''}}pattern:::^[a-zA-Z0-9/\-()~$]+$:::只能包含字母,数字和/-()~"
+                        mentionId="td_lcloth_{{$index}}"
+                        type="text" ng-model="d.cloth"><br />
+                    <span class="invalid_msg" id="td_lcloth_{{$index}}"></span></td>
+                <td>数量</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasLongSleeve" type="text"
+                        enter
+                        maxlength="7"
+                        fieldName="数量"
+                        validation="required|||number:::0"
+                        mentionId="td_lamount_{{$index}}"
+                        ng-model="d.amount"><br />
+                    <span class="invalid_msg" id="td_lamount_{{$index}}"></span></td>
+                <td ng-if="isShowDelete(true)" ng-click="deleteDetail(order.hasLongSleeve,d)">删除</td>
+                <td><span ng-if="$last" ng-click="addDetail(true,order.hasLongSleeve)">添加</span></td>
+            </tr>
+            <tr>
+            <td>短袖</td>
+            <td>
+                <input enter type="checkbox" id="chk_short" ng-model="order.hasShortSleeve">&nbsp;<span class="invalid_msg" id="td_m_shortsleeve"></span></td>
+            <td colspan="6"></td>
+        </tr>
+        <tbody ng-class="{diableSleeve:!order.hasShortSleeve}">
+            <tr  class="valign_top" ng-repeat="d in order.orderDetails|filter:{isLongSleeve:false}">
+                <td>颜色</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasShortSleeve"
+                        enter
+                        maxlength="10"
+                        fieldName="颜色"
+                        validation="{{isOrderDetailRequired(false)?'required|||':''}}pattern:::^[a-zA-Z0-9\u4e00-\u9fa5]+$:::只能包含字母，数字和中文"
+                        mentionId="td_scolor_{{$index}}"
+                        type="text" ng-model="d.color">
+                    <br />
+                    <span class="invalid_msg" id="td_scolor_{{$index}}"></span>
+                </td>
+                <td>布料</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasShortSleeve" type="text"
+                        enter
+                        maxlength="10"
+                        fieldName="布料"
+                        validation="{{isOrderDetailRequired(false)?'required|||':''}}pattern:::^[a-zA-Z0-9/\-()~$]+$:::只能包含字母,数字和/-()~"
+                        mentionId="td_scloth_{{$index}}"
+                        ng-model="d.cloth">
+                    <br />
+                    <span class="invalid_msg" id="td_scloth_{{$index}}"></span>
+                </td>
+                <td>数量</td>
+                <td>
+                    <input class="input_edit" ng-disabled="!order.hasShortSleeve" type="text"
+                        enter
+                        maxlength="7"
+                        fieldName="数量"
+                        validation="required|||number:::0"
+                        mentionId="td_samount_{{$index}}"
+                        ng-model="d.amount"><br />
+                    <span class="invalid_msg" id="td_samount_{{$index}}"></span></td>
+                <td ng-if="isShowDelete(false)" ng-click="deleteDetail(order.hasShortSleeve,d)">删除</td>
+                <td><span ng-if="$last" ng-click="addDetail(false,order.hasShortSleeve)">添加</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<input type="button" value="同步" validate-click="sync()" />

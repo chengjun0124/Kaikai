@@ -1,0 +1,86 @@
+<div class="home_attention" ng-controller="head" ng-include="headTemplate"></div>
+<div class="form">
+    <table>
+        <tr>
+            <td>公司名称</td>
+            <td>
+                <select id="sel_company"
+                validation="required"
+                fieldname="公司名称"
+                mentionid="td_m_company"
+                ng-model="company">
+                <option value="">请选择</option>
+                <option ng-repeat="c in companies" value="{{c}}">{{c}}</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_company"></td>
+        </tr>
+        <tr>
+            <td>男装尺码</td>
+            <td>
+                <select id="sel_man_size"
+                validation="required"
+                fieldname="男装尺码"
+                mentionid="td_m_man"
+                ng-model="manSizeId">
+                <option value="">请选择</option>
+                <option ng-repeat="s in sizes|filter:{sex:'M'}" value="{{s.sizeId}}">{{s.sizeName}}</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_man"></td>
+        </tr>
+        <tr>
+            <td>女装尺码</td>
+            <td>
+                <select id="sel_woman_size"
+                validation="required"
+                fieldname="女装尺码"
+                mentionid="td_m_woman"
+                ng-model="womanSizeId">
+                <option value="">请选择</option>
+                <option ng-repeat="s in sizes|filter:{sex:'F'}" value="{{s.sizeId}}">{{s.sizeName}}</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_woman"></td>
+        </tr>
+        <!--<tr>
+            <td>男装胸围放大</td>
+            <td>
+                <input class="s_number" id="txt_manChestEnlarge"
+                enter
+                maxlength="2"
+                validation="required|||number:::0|||range:::0-20"
+                fieldname="男性胸围放大"
+                mentionid="td_m_manChestEnlarge"
+                ng-model="manChestEnlarge" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_manChestEnlarge"></td>
+        </tr>
+        <tr>
+            <td>女装胸围放大</td>
+            <td>
+                <input class="s_number" id="txt_womanChestEnlarge"
+                enter
+                maxlength="2"
+                validation="required|||number:::0|||range:::0-20"
+                fieldname="女性胸围放大"
+                mentionid="td_m_womanChestEnlarge"
+                ng-model="womanChestEnlarge" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_womanChestEnlarge"></td>
+        </tr>-->
+        <tr>
+            <td colspan="2"><input type="button" validate-click="export()" value="导出Excel" /></td>
+        </tr>
+    </table>
+</div>

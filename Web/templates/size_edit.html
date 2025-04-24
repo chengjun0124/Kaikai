@@ -1,0 +1,177 @@
+<div class="home_attention" ng-controller="head" ng-include="headTemplate"></div>
+<div class="form">
+    <table>
+        <tr>
+            <td>尺寸表名称</td>
+            <td colspan="2">
+                <input enter class="input_edit" maxlength="16" type="text" ng-model="size.sizeName"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2" class="invalid_msg" id="td_m_sizename"></td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td colspan="2">
+                <input enter type="radio" ng-model="size.sex" value="M" name="sex">男<input enter type="radio" value="F" ng-model="size.sex" name="sex">女</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_sex"></td>
+        </tr>
+        <tr>
+            <td>领围范围</td>
+            <td>-<input enter class="s_number" ng-model="size.neckScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.neckScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_neckscopel"></td>
+            <td class="invalid_msg" id="td_m_neckscopeu"></td>
+        </tr>
+        <tr>
+            <td>肩宽范围</td>
+            <td>-<input enter class="s_number" ng-model="size.shoulderScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.shoulderScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_shoulderscopel"></td>
+            <td class="invalid_msg" id="td_m_shoulderscopeu"></td>
+        </tr>
+        <tr>
+            <td>前衣长范围</td>
+            <td>-<input enter class="s_number" ng-model="size.fLengthScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.fLengthScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_flengthscopel"></td>
+            <td class="invalid_msg" id="td_m_flengthscopeu"></td>
+        </tr>
+        <tr>
+            <td>后衣长范围</td>
+            <td>-<input enter class="s_number" ng-model="size.bLengthScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.bLengthScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_blengthscopel"></td>
+            <td class="invalid_msg" id="td_m_blengthscopeu"></td>
+        </tr>
+        <tr>
+            <td>胸围范围</td>
+            <td>-<input enter class="s_number" ng-model="size.chestScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.chestScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_chestscopel"></td>
+            <td class="invalid_msg" id="td_m_chestscopeu"></td>
+        </tr>
+        <tr>
+            <td>腰围范围</td>
+            <td>-<input enter class="s_number" ng-model="size.waistScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.waistScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_waistscopel"></td>
+            <td class="invalid_msg" id="td_m_waistscopeu"></td>
+        </tr>
+        <tr>
+            <td>下摆范围</td>
+            <td>-<input enter class="s_number" ng-model="size.lowerHemScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.lowerHemScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_lowerhemscopel"></td>
+            <td class="invalid_msg" id="td_m_lowerhemscopeu"></td>
+        </tr>
+        <tr>
+            <td>长袖长范围</td>
+            <td>-<input enter class="s_number" ng-model="size.lSleeveLengthScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.lSleeveLengthScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_lsleevelengthscopel"></td>
+            <td class="invalid_msg" id="td_m_lsleevelengthscopeu"></td>
+        </tr>
+        <tr>
+            <td>长袖口大范围</td>
+            <td>-<input enter class="s_number" ng-model="size.lSleeveCuffScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.lSleeveCuffScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_lsleevecuffscopel"></td>
+            <td class="invalid_msg" id="td_m_lsleevecuffscopeu"></td>
+        </tr>
+        <tr>
+            <td>短袖长范围</td>
+            <td>-<input enter class="s_number" ng-model="size.sSleeveLengthScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.sSleeveLengthScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_ssleevelengthscopel"></td>
+            <td class="invalid_msg" id="td_m_ssleevelengthscopeu"></td>
+        </tr>
+        <tr>
+            <td>短袖口大范围</td>
+            <td>-<input enter class="s_number" ng-model="size.sSleeveCuffScopeL" /></td>
+            <td>+<input enter class="s_number" ng-model="size.sSleeveCuffScopeU" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="invalid_msg" id="td_m_ssleevecuffscopel"></td>
+            <td class="invalid_msg" id="td_m_ssleevecuffscopeu"></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <table>
+        <tr>
+            <td>尺码</td>
+            <td>尺码别名</td>
+            <td>领围</td>
+            <td>肩宽</td>
+            <td>前衣长</td>
+            <td>后衣长</td>
+            <td>胸围</td>
+            <td>腰围</td>
+            <td>下摆</td>
+            <td>长袖长</td>
+            <td>长袖口大</td>
+            <td>短袖长</td>
+            <td>短袖口大</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr ng-repeat="sd in size.sizeDetails">
+            <td><input enter class="s_number" ng-model="sd.sizeName" /><span class="invalid_msg" id="td_m_sizename_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.sizeAlias" /><span class="invalid_msg" id="td_m_sizealias_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.neck" /><span class="invalid_msg" id="td_m_neck_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.shoulder" /><span class="invalid_msg" id="td_m_shoulder_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.fLength" /><span class="invalid_msg" id="td_m_flength_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.bLength" /><span class="invalid_msg" id="td_m_blength_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.chest" /><span class="invalid_msg" id="td_m_chest_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.waist" /><span class="invalid_msg" id="td_m_waist_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.lowerHem" /><span class="invalid_msg" id="td_m_lowerhem_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.lSleeveLength" /><span class="invalid_msg" id="td_m_lsleevelength_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.lSleeveCuff" /><span class="invalid_msg" id="td_m_lsleevecuff_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.sSleeveLength" /><span class="invalid_msg" id="td_m_ssleevelength_{{$index}}"></span></td>
+            <td><input enter class="s_number" ng-model="sd.sSleeveCuff" /><span class="invalid_msg" id="td_m_ssleevecuff_{{$index}}"></span></td>
+            <td><a ng-show="size.sizeDetails.length>1" ng-click="deleteDetail(sd)">删除</a> <a ng-show="$index==size.sizeDetails.length-1" ng-click="addDetail()">添加</a></td>
+        </tr>
+        <tr>
+            <td class="invalid_msg" id="td_m_sizedetails" colspan="14"></td>
+        </tr>
+        <tr>
+            <td colspan="14">
+                <input validate-click="submit()" type="button" value="提交" /></td>
+        </tr>
+    </table>
+</div>
+
